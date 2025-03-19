@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-20 px-4 sm:px-6 lg:px-8;
+  }
+  
+  .container {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .heading-1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-bold text-text-primary;
+  }
+  
+  .heading-2 {
+    @apply text-3xl sm:text-4xl font-bold text-text-primary;
+  }
+  
+  .heading-3 {
+    @apply text-2xl sm:text-3xl font-bold text-text-primary;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-3 bg-secondary text-secondary-foreground font-semibold rounded-lg 
+           hover:bg-opacity-90 transition-all duration-300;
+  }
+  
+  .btn-outline {
+    @apply px-6 py-3 border-2 border-secondary text-secondary font-semibold rounded-lg 
+           hover:bg-secondary/10 transition-all duration-300;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--background-start-rgb));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--foreground-rgb) / 0.2);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--foreground-rgb) / 0.3);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background: rgb(var(--foreground-rgb) / 0.2);
+  color: rgb(var(--foreground-rgb));
+}
+
+/* Section transitions */
+section {
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  transform-origin: center top;
+} 

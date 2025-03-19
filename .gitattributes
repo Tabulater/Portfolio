@@ -1,0 +1,6 @@
+*.css text/css
+*.js text/javascript
+*.ts text/typescript
+*.tsx text/typescript
+*.json text/json
+*.md text/markdown 
