@@ -9,11 +9,10 @@ export const metadata: Metadata = {
   description: 'Professional portfolio showcasing my work, skills, and achievements in software development.',
   icons: {
     icon: [
-      { url: '/favicon.ico' },
-      { url: '/icon.png', type: 'image/png' },
+      { url: '/Favicon.png', type: 'image/png' },
     ],
     apple: [
-      { url: '/apple-icon.png', type: 'image/png' },
+      { url: '/Favicon.png', type: 'image/png' },
     ],
   },
   manifest: '/manifest.json',
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
     siteName: 'Aashrith Portfolio',
     images: [
       {
-        url: '/og-image.png',
+        url: '/Favicon.png',
         width: 1200,
         height: 630,
         alt: 'Aashrith Portfolio',
@@ -42,7 +41,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Aashrith | Portfolio',
     description: 'Professional portfolio showcasing my work, skills, and achievements in software development.',
-    images: ['/og-image.png'],
+    images: ['/Favicon.png'],
   },
 }
 
