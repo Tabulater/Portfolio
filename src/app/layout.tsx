@@ -7,6 +7,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Aashrith | Portfolio',
   description: 'Professional portfolio showcasing my work, skills, and achievements in software development.',
+  verification: {
+    google: '8Yl3Db-N4LEBCmjt5Jgf_kvFbeoNa8W1_hCwxqZ0vGc',
+  },
   icons: {
     icon: [
       { url: '/Favicon.png', type: 'image/png' },
