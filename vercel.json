@@ -2,5 +2,8 @@
   "version": 2,
   "framework": "nextjs",
   "buildCommand": "chmod +x ./node_modules/.bin/next && next build",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "rewrites": [
+    { "source": "/googled17485334eeaf31b.html", "destination": "/googled17485334eeaf31b.html" }
+  ]
 } 

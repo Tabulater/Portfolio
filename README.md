@@ -46,9 +46,8 @@ yarn dev
 
 1. Update your personal information in `src/app/page.tsx`
 2. Add your projects in the Projects section
-3. Modify the skills list to match your expertise
-4. Update the contact information
-5. Add your profile picture in the About section
+3. Update the contact information
+4. Add your profile picture in the About section
 
 ## Deployment
 
