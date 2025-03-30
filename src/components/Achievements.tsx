@@ -61,60 +61,63 @@ export default function Achievements() {
             Achievements
           </motion.h2>
           
-          <div className="relative">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5 }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
-              >
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center">
-                      <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={achievements[currentIndex].icon} />
-                      </svg>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">{achievements[currentIndex].title}</h3>
-                    <p className="text-text-secondary mb-2">{achievements[currentIndex].organization}</p>
-                    <p className="text-text-secondary mb-4">{achievements[currentIndex].description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">
-                        {achievements[currentIndex].year}
-                      </span>
-                      <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">
-                        {achievements[currentIndex].category}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+          <div className="relative flex items-center gap-4">
+            {/* Left Arrow */}
+            <motion.button
+              onClick={prevAchievement}
+              className="p-3 rounded-full bg-secondary/20 text-secondary hover:bg-secondary/30 transition-colors"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaChevronLeft className="w-6 h-6" />
+            </motion.button>
 
-            {/* Navigation Arrows */}
-            <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-4 pointer-events-none">
-              <motion.button
-                onClick={prevAchievement}
-                className="p-2 rounded-full bg-secondary/20 text-secondary hover:bg-secondary/30 transition-colors pointer-events-auto"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <FaChevronLeft className="w-6 h-6" />
-              </motion.button>
-              <motion.button
-                onClick={nextAchievement}
-                className="p-2 rounded-full bg-secondary/20 text-secondary hover:bg-secondary/30 transition-colors pointer-events-auto"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <FaChevronRight className="w-6 h-6" />
-              </motion.button>
+            {/* Achievement Card */}
+            <div className="flex-1">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.5 }}
+                  className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={achievements[currentIndex].icon} />
+                        </svg>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-white mb-2">{achievements[currentIndex].title}</h3>
+                      <p className="text-text-secondary mb-2">{achievements[currentIndex].organization}</p>
+                      <p className="text-text-secondary mb-4">{achievements[currentIndex].description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">
+                          {achievements[currentIndex].year}
+                        </span>
+                        <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">
+                          {achievements[currentIndex].category}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
+
+            {/* Right Arrow */}
+            <motion.button
+              onClick={nextAchievement}
+              className="p-3 rounded-full bg-secondary/20 text-secondary hover:bg-secondary/30 transition-colors"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaChevronRight className="w-6 h-6" />
+            </motion.button>
           </div>
 
           {/* Education Section */}
