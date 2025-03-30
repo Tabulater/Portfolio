@@ -1,8 +1,47 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+
+const achievements = [
+  {
+    title: "Principal Honour Roll",
+    organization: "Mother Teresa Catholic Secondary School",
+    description: "Maintained 85% average in all subjects",
+    year: "2022-2024",
+    category: "Academic Excellence",
+    icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+  },
+  {
+    title: "Blue Ocean Competition",
+    organization: "GaiaCure Pitch",
+    description: "Ranked in top 350 participants with innovative pitch",
+    year: "2024",
+    category: "Competition",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z"
+  },
+  {
+    title: "Creative Writing Contest",
+    organization: "Occasus High School Creative Writing Contest",
+    description: "Won first place for short story 'The Glassblower's Ephemera' in collaboration with Western University",
+    year: "2024",
+    category: "Writing",
+    icon: "M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+  }
+];
 
 export default function Achievements() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextAchievement = () => {
+    setCurrentIndex((prev) => (prev + 1) % achievements.length);
+  };
+
+  const prevAchievement = () => {
+    setCurrentIndex((prev) => (prev - 1 + achievements.length) % achievements.length);
+  };
+
   return (
     <section id="achievements" className="section-padding bg-primary/50">
       <div className="container">
@@ -12,49 +51,72 @@ export default function Achievements() {
           transition={{ duration: 0.8 }}
           className="max-w-3xl mx-auto space-y-16"
         >
-          {/* Achievement */}
-          <motion.div>
-            <motion.h2 
-              className="heading-2 text-center mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Achievement
-            </motion.h2>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
-            >
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+          <motion.h2 
+            className="heading-2 text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Achievements
+          </motion.h2>
+          
+          <div className="relative">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.5 }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center">
+                      <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={achievements[currentIndex].icon} />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">{achievements[currentIndex].title}</h3>
+                    <p className="text-text-secondary mb-2">{achievements[currentIndex].organization}</p>
+                    <p className="text-text-secondary mb-4">{achievements[currentIndex].description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">
+                        {achievements[currentIndex].year}
+                      </span>
+                      <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">
+                        {achievements[currentIndex].category}
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Principal Honour Roll</h3>
-                  <p className="text-text-secondary mb-2">Mother Teresa Catholic Secondary School</p>
-                  <p className="text-text-secondary mb-4">Maintained 85% average in all subjects</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">
-                      2022-2024
-                    </span>
-                    <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">
-                      Academic Excellence
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+              </motion.div>
+            </AnimatePresence>
 
-          {/* Education */}
+            {/* Navigation Arrows */}
+            <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-4 pointer-events-none">
+              <motion.button
+                onClick={prevAchievement}
+                className="p-2 rounded-full bg-secondary/20 text-secondary hover:bg-secondary/30 transition-colors pointer-events-auto"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaChevronLeft className="w-6 h-6" />
+              </motion.button>
+              <motion.button
+                onClick={nextAchievement}
+                className="p-2 rounded-full bg-secondary/20 text-secondary hover:bg-secondary/30 transition-colors pointer-events-auto"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaChevronRight className="w-6 h-6" />
+              </motion.button>
+            </div>
+          </div>
+
+          {/* Education Section */}
           <motion.div>
             <motion.h2 
               className="heading-2 text-center mb-12"
