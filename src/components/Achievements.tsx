@@ -31,7 +31,7 @@ const achievements = [
   }
 ];
 
-// Achievement component with animated carousel and navigation
+// Achievement component with animated carousel and navigation - Updated Git author
 export default function Achievements() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
