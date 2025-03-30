@@ -23,8 +23,8 @@ const achievements = [
   },
   {
     title: "Creative Writing Contest",
-    organization: "Occasus High School Creative Writing Contest",
-    description: "Won first place for short story 'The Glassblower's Ephemera' in collaboration with Western University",
+    organization: "Western University",
+    description: "Won first place in Occasus High School Creative Writing Contest for short story 'The Glassblower's Ephemera'",
     year: "2024",
     category: "Writing",
     icon: "M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
