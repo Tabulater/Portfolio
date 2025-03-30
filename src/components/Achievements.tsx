@@ -31,7 +31,7 @@ const achievements = [
   }
 ];
 
-// Achievement component with animated carousel
+// Achievement component with animated carousel and navigation
 export default function Achievements() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
