@@ -7,8 +7,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Aashrith | Portfolio',
-  description: 'Professional portfolio showcasing my work, skills, and achievements in software development.',
+  title: 'Aashrith Raj Tatipamula | Student & Developer Portfolio',
+  description: 'Personal portfolio of Aashrith Raj Tatipamula, a student developer showcasing achievements including Blue Ocean Competition and Occasus Creative Writing Contest winner.',
   verification: {
     google: '8Yl3Db-N4LEBCmjt5Jgf_kvFbeoNa8W1_hCwxqZ0vGc',
   },
@@ -24,19 +24,30 @@ export const metadata: Metadata = {
   themeColor: '#000000',
   viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
-  keywords: ['portfolio', 'developer', 'software engineer', 'web development', 'Aashrith'],
-  authors: [{ name: 'Aashrith' }],
+  keywords: [
+    'Aashrith Raj Tatipamula',
+    'Aashrith Tatipamula',
+    'Aashrith Raj',
+    'student developer',
+    'Blue Ocean Competition',
+    'Occasus Creative Writing Contest',
+    'GaiaCure',
+    'portfolio',
+    'London Ontario',
+    'Mother Teresa Catholic Secondary School'
+  ],
+  authors: [{ name: 'Aashrith Raj Tatipamula' }],
   openGraph: {
-    title: 'Aashrith | Portfolio',
-    description: 'Professional portfolio showcasing my work, skills, and achievements in software development.',
-    url: 'https://your-portfolio-url.com',
-    siteName: 'Aashrith Portfolio',
+    title: 'Aashrith Raj Tatipamula | Student & Developer Portfolio',
+    description: 'Personal portfolio of Aashrith Raj Tatipamula, a student developer showcasing achievements including Blue Ocean Competition and Occasus Creative Writing Contest winner.',
+    url: 'https://aashrithrajtatipamula.vercel.app',
+    siteName: 'Aashrith Raj Tatipamula Portfolio',
     images: [
       {
         url: '/Favicon.png',
         width: 1200,
         height: 630,
-        alt: 'Aashrith Portfolio',
+        alt: 'Aashrith Raj Tatipamula Portfolio',
       },
     ],
     locale: 'en_US',
@@ -44,8 +55,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aashrith | Portfolio',
-    description: 'Professional portfolio showcasing my work, skills, and achievements in software development.',
+    title: 'Aashrith Raj Tatipamula | Student & Developer Portfolio',
+    description: 'Personal portfolio of Aashrith Raj Tatipamula, a student developer showcasing achievements including Blue Ocean Competition and Occasus Creative Writing Contest winner.',
     images: ['/Favicon.png'],
   },
 }
