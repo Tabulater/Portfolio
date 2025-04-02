@@ -7,7 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Aashrith Raj Tatipamula Portfolio',
+  title: 'Aashrith Raj Tatipamula',
   description: 'Personal portfolio of Aashrith Raj Tatipamula, a student developer showcasing achievements including Blue Ocean Competition and Occasus Creative Writing Contest winner.',
   verification: {
     google: '8Yl3Db-N4LEBCmjt5Jgf_kvFbeoNa8W1_hCwxqZ0vGc',
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aashrith Raj Tatipamula Portfolio',
+    title: 'Aashrith Raj Tatipamula',
     description: 'Personal portfolio of Aashrith Raj Tatipamula, a student developer showcasing achievements including Blue Ocean Competition and Occasus Creative Writing Contest winner.',
     images: ['/Favicon.png'],
   },
