@@ -106,7 +106,7 @@ export default function Home() {
             >
               Hi, I'm{' '}
               <span className="text-secondary relative inline-block">
-                Aashrith
+                Aashrith Raj Tatipamula
                 <motion.span
                   className="absolute -bottom-2 left-0 w-full h-1 bg-secondary"
                   initial={{ scaleX: 0 }}
@@ -187,7 +187,7 @@ export default function Home() {
             >
               <h2 className="heading-2">About Me</h2>
               <p className="text-text-secondary text-lg leading-relaxed">
-                Hello, I'm Aashrith, a passionate and innovative grade 11 student with a interest in engineering, technology, and solving real-world problems. I've explored areas like autonomous systems and neural networks. My journey involves blending creativity with technical expertise, aiming to develop projects that make a meaningful impact.
+                Hello, I'm Aashrith Raj Tatipamula, a passionate and innovative grade 11 student with a interest in engineering, technology, and solving real-world problems. I've explored areas like autonomous systems and neural networks. My journey involves blending creativity with technical expertise, aiming to develop projects that make a meaningful impact.
               </p>
               <p className="text-text-secondary text-lg leading-relaxed">
                 I am particularly fascinated by creating technology solutions, ranging from distributed computing systems to using arduino. I strive to innovate and constantly learn. Through my portfolio, I hope to showcase my projects and passion for engineering, while continuing to grow and collaborate with like-minded individuals.
