@@ -106,7 +106,7 @@ export default function Home() {
             >
               Hi, I'm{' '}
               <span className="text-secondary relative inline-block">
-                Aashrith Raj Tatipamula
+                Aashrith Raj
                 <motion.span
                   className="absolute -bottom-2 left-0 w-full h-1 bg-secondary"
                   initial={{ scaleX: 0 }}
