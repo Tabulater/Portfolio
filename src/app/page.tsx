@@ -190,7 +190,7 @@ export default function Home() {
                 Hello, I'm Aashrith Raj Tatipamula, a passionate and innovative grade 11 student with a interest in engineering, technology, and solving real-world problems. I've explored areas like autonomous systems and neural networks. My journey involves blending creativity with technical expertise, aiming to develop projects that make a meaningful impact.
               </p>
               <p className="text-text-secondary text-lg leading-relaxed">
-                I am particularly fascinated by creating technology solutions, ranging from distributed computing systems to using arduino. I strive to innovate and constantly learn. Through my portfolio, I hope to showcase my projects and passion for engineering, while continuing to grow and collaborate with like-minded individuals.
+                I am particularly fascinated by creating technology solutions, ranging from distributed computing systems to using Arduino. I strive to innovate and constantly learn. Through my portfolio, I hope to showcase my projects and passion for engineering, while continuing to grow and collaborate with like-minded individuals.
               </p>
             </motion.div>
             <motion.div 
