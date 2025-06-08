@@ -50,12 +50,12 @@ export default function Home() {
     <div className="relative">
       {showIntro && <IntroAnimation onComplete={handleIntroComplete} />}
       
-      {/* Navigation */}
+      {/* Updated Navigation Bar */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ delay: 0.5 }}
-        className="fixed top-0 w-full bg-primary/90 backdrop-blur-sm z-50"
+        className="fixed top-0 w-full bg-primary/90 backdrop-blur-sm z-50 shadow-md"
       >
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
@@ -79,7 +79,7 @@ export default function Home() {
         </div>
       </motion.nav>
 
-      {/* Hero Section */}
+      {/* Updated Hero Section */}
       <section id="home" className="min-h-screen flex items-center section-padding relative overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden">

@@ -15,6 +15,7 @@ body {
     rgb(var(--background-start-rgb)),
     rgb(var(--background-end-rgb))
   );
+  background-attachment: fixed;
 }
 
 @layer base {
@@ -46,12 +47,12 @@ body {
   
   .btn-primary {
     @apply px-6 py-3 bg-secondary text-secondary-foreground font-semibold rounded-lg 
-           hover:bg-opacity-90 transition-all duration-300;
+           hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-lg;
   }
   
   .btn-outline {
     @apply px-6 py-3 border-2 border-secondary text-secondary font-semibold rounded-lg 
-           hover:bg-secondary/10 transition-all duration-300;
+           hover:bg-secondary/10 transition-all duration-300 shadow-md hover:shadow-lg;
   }
 }
 
@@ -119,4 +120,8 @@ html {
 section {
   transition: transform 0.5s ease-out, opacity 0.5s ease-out;
   transform-origin: center top;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 1rem 0;
+  padding: 1rem;
 } 
