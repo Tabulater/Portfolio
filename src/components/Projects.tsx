@@ -24,14 +24,14 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        {/* Updated Featured Project */}
+        {/* Redesigned Featured Project */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-24"
         >
-          <div className="bg-primary/50 rounded-2xl p-8 hover:bg-primary/60 transition-colors">
+          <div className="bg-primary/50 rounded-2xl p-8 hover:bg-primary/60 transition-colors shadow-lg border border-secondary/20">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="relative aspect-video rounded-xl overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/50 to-secondary/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -63,14 +63,14 @@ export default function Projects() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Click Me
+                  View Project
                 </motion.button>
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* Updated Other Projects */}
+        {/* Redesigned Other Projects */}
         <div className="grid md:grid-cols-2 gap-8">
           {[...featuredProjects.slice(1), ...otherProjects].map((project, index) => (
             <motion.div
@@ -79,7 +79,7 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
             >
-              <div className="bg-primary/30 rounded-2xl p-6 hover:bg-primary/40 transition-colors h-full">
+              <div className="bg-primary/30 rounded-2xl p-6 hover:bg-primary/40 transition-colors h-full shadow-lg border border-secondary/20">
                 <div className="relative aspect-video rounded-xl overflow-hidden mb-6 group">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/50 to-secondary/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20"></div>
@@ -110,7 +110,7 @@ export default function Projects() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    Click Me
+                    View Project
                   </motion.button>
                 </div>
               </div>
