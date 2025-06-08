@@ -24,7 +24,7 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        {/* Featured Project */}
+        {/* Updated Featured Project */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -58,12 +58,19 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
+                <motion.button
+                  className="btn-primary"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Click Me
+                </motion.button>
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* Other Projects */}
+        {/* Updated Other Projects */}
         <div className="grid md:grid-cols-2 gap-8">
           {[...featuredProjects.slice(1), ...otherProjects].map((project, index) => (
             <motion.div
@@ -98,6 +105,13 @@ export default function Projects() {
                       </span>
                     ))}
                   </div>
+                  <motion.button
+                    className="btn-primary"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Click Me
+                  </motion.button>
                 </div>
               </div>
             </motion.div>
