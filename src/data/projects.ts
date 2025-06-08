@@ -2,40 +2,58 @@ export interface Project {
   title: string;
   description: string;
   technologies: string[];
-  link?: string;
-  image?: string;
   featured: boolean;
+  link: string;
+  github?: string;
 }
 
 export const projects: Project[] = [
   {
-    title: "Portfolio Website",
-    description: "Responsive personal portfolio showcasing skills and projects",
-    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    title: "Autonomous Robot Navigation System",
+    description: "Developed a sophisticated autonomous navigation system using ROS (Robot Operating System) and computer vision. Implemented SLAM algorithms for real-time mapping and path planning, achieving 95% accuracy in obstacle avoidance.",
+    technologies: ["ROS", "Python", "OpenCV", "C++", "SLAM", "Computer Vision"],
     featured: true,
+    link: "#",
+    github: "https://github.com/yourusername/robot-navigation"
   },
   {
-    title: "Skin Diagnosis App",
-    description: "Utilizes your phone's camera to analyze skin conditions and provide personalized health recommendations.",
-    technologies: ["React Native", "TensorFlow", "Python", "Flask"],
+    title: "Smart Home Automation Hub",
+    description: "Engineered a centralized home automation system using Arduino and Raspberry Pi. Integrated various sensors and actuators for environmental monitoring and control, with a custom web interface for remote access.",
+    technologies: ["Arduino", "Raspberry Pi", "Python", "IoT", "Web Development"],
     featured: true,
+    link: "#",
+    github: "https://github.com/yourusername/smart-home"
   },
   {
-    title: "Distributed Computing Network for Scientific Research",
-    description: "Created a distributed computing network using old PCs to support scientific projects using BOINC",
-    technologies: ["Python", "Linux", "BOINC", "System Administration"],
-    featured: true,
-  },
-  {
-    title: "Smart Glove for Peripheral Neuropathy",
-    description: "Developed a smart glove that helps patients with peripheral neuropathy regain their sense of touch.",
-    technologies: ["Arduino", "C++", "Electronics", "Medical Devices"],
+    title: "3D Printer Controller",
+    description: "Designed and implemented a custom 3D printer controller using STM32 microcontroller. Developed firmware for precise motor control and temperature regulation, achieving 0.1mm printing accuracy.",
+    technologies: ["STM32", "C", "Embedded Systems", "PID Control"],
     featured: false,
+    link: "#",
+    github: "https://github.com/yourusername/3d-printer"
   },
   {
-    title: "YouTube Channel",
-    description: "Utilize Manim to create educational content for my youtube channel.",
-    technologies: ["Python", "Manim", "Video Production", "Content Creation"],
+    title: "Quadcopter Flight Controller",
+    description: "Built a quadcopter flight controller from scratch using Arduino and MPU6050. Implemented PID control algorithms for stable flight and autonomous hovering capabilities.",
+    technologies: ["Arduino", "C++", "PID Control", "Embedded Systems"],
     featured: false,
+    link: "#",
+    github: "https://github.com/yourusername/quadcopter"
+  },
+  {
+    title: "Automated Plant Monitoring System",
+    description: "Created an IoT-based plant monitoring system with automated watering capabilities. Integrated soil moisture sensors and developed a machine learning model for optimal watering schedules.",
+    technologies: ["IoT", "Python", "Machine Learning", "Arduino"],
+    featured: false,
+    link: "#",
+    github: "https://github.com/yourusername/plant-monitor"
+  },
+  {
+    title: "CNC Machine Controller",
+    description: "Developed a custom CNC machine controller using GRBL firmware. Implemented G-code interpreter and stepper motor control for precise movement and cutting operations.",
+    technologies: ["GRBL", "C++", "Embedded Systems", "G-code"],
+    featured: false,
+    link: "#",
+    github: "https://github.com/yourusername/cnc-controller"
   }
 ]; 

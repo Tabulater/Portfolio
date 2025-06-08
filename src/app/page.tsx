@@ -24,10 +24,9 @@ export default function Home() {
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
-      const yOffset = -80; // Adjust this value to account for the fixed header
+      const yOffset = -80;
       const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
       
-      // Add zoom effect
       section.style.transform = 'scale(0.95)';
       section.style.opacity = '0.8';
       
@@ -36,7 +35,6 @@ export default function Home() {
         behavior: 'smooth'
       });
 
-      // Reset zoom effect after animation
       setTimeout(() => {
         section.style.transform = 'scale(1)';
         section.style.opacity = '1';
@@ -50,25 +48,25 @@ export default function Home() {
     <div className="relative">
       {showIntro && <IntroAnimation onComplete={handleIntroComplete} />}
       
-      {/* Updated Navigation Bar */}
+      {/* Professional Navigation Bar */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ delay: 0.5 }}
-        className="fixed top-0 w-full bg-primary/90 backdrop-blur-sm z-50 shadow-md"
+        className="fixed top-0 w-full glass z-50 shadow-lg"
       >
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <button onClick={() => scrollToSection('home')} className="text-2xl font-bold text-secondary">
-              Portfolio
+            <button onClick={() => scrollToSection('home')} className="text-2xl font-bold gradient-text">
+              Aashrith Raj
             </button>
             <div className="hidden md:flex space-x-8">
               {['home', 'about', 'projects', 'contact'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
-                  className={`capitalize hover:text-secondary transition-colors ${
-                    activeSection === section ? 'text-secondary' : 'text-text-secondary'
+                  className={`capitalize hover:text-[rgb(var(--primary))] transition-colors ${
+                    activeSection === section ? 'text-[rgb(var(--primary))]' : 'text-text-secondary'
                   }`}
                 >
                   {section}
@@ -79,15 +77,14 @@ export default function Home() {
         </div>
       </motion.nav>
 
-      {/* Updated Hero Section */}
+      {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center section-padding relative overflow-hidden">
-        {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-secondary/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--background-start-rgb))] via-[rgb(var(--background-end-rgb))] to-[rgb(var(--primary))]/10"></div>
           <div className="absolute inset-0">
-            <div className="absolute top-0 -left-4 w-72 h-72 bg-secondary/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-            <div className="absolute top-0 -right-4 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-secondary/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+            <div className="absolute top-0 -left-4 w-72 h-72 bg-[rgb(var(--primary))]/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+            <div className="absolute top-0 -right-4 w-72 h-72 bg-[rgb(var(--secondary))]/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-[rgb(var(--accent))]/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
           </div>
         </div>
         
@@ -104,30 +101,25 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
-              Hi, I'm{' '}
-              <span className="text-secondary relative inline-block">
-                Aashrith Raj
+              Aspiring{' '}
+              <span className="gradient-text relative inline-block">
+                Mechatronics Engineer
                 <motion.span
-                  className="absolute -bottom-2 left-0 w-full h-1 bg-secondary"
+                  className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[rgb(var(--primary))] to-[rgb(var(--secondary))]"
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ delay: 0.5, duration: 0.5 }}
                 />
-                <motion.span
-                  className="absolute -inset-1 bg-secondary/20 rounded-lg"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 0.2 }}
-                  transition={{ delay: 0.7, duration: 0.5 }}
-                />
               </span>
             </motion.h1>
             <motion.p 
-              className="text-xl text-text-secondary mb-12"
+              className="text-xl text-text-secondary mb-12 leading-relaxed"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              I'm a Secondary School Student, who is passionate about learning new things and building new projects.
+              Passionate about robotics, automation, and embedded systems. Currently developing innovative solutions 
+              that combine mechanical, electrical, and software engineering principles.
             </motion.p>
             <motion.div 
               className="flex space-x-6 mb-12"
@@ -141,7 +133,7 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                View My Work
+                View Projects
                 <motion.span
                   className="inline-block ml-2 group-hover:translate-x-1 transition-transform"
                   initial={{ x: 0 }}
@@ -170,7 +162,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="section-padding bg-primary/50">
+      <section id="about" className="section-padding glass">
         <div className="container">
           <motion.div
             ref={ref}
@@ -185,13 +177,27 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="space-y-6"
             >
-              <h2 className="heading-2">About Me</h2>
+              <h2 className="heading-2">
+                <span className="gradient-text">About Me</span>
+              </h2>
               <p className="text-text-secondary text-lg leading-relaxed">
-                Hello, I'm Aashrith Raj Tatipamula, a passionate and innovative grade 11 student with a interest in engineering, technology, and solving real-world problems. I've explored areas like autonomous systems and neural networks. My journey involves blending creativity with technical expertise, aiming to develop projects that make a meaningful impact.
+                I'm a dedicated student with a passion for mechatronics and robotics engineering. My journey in 
+                technology began with Arduino projects and has evolved into complex systems involving embedded 
+                programming, control systems, and machine learning.
               </p>
               <p className="text-text-secondary text-lg leading-relaxed">
-                I am particularly fascinated by creating technology solutions, ranging from distributed computing systems to using Arduino. I strive to innovate and constantly learn. Through my portfolio, I hope to showcase my projects and passion for engineering, while continuing to grow and collaborate with like-minded individuals.
+                I specialize in developing innovative solutions that bridge the gap between hardware and software. 
+                My projects range from autonomous robots to smart home systems, each demonstrating my ability to 
+                integrate mechanical, electrical, and software components effectively.
               </p>
+              <div className="flex flex-wrap gap-4 mt-8">
+                <span className="tech-badge">Embedded Systems</span>
+                <span className="tech-badge">Robotics</span>
+                <span className="tech-badge">Control Systems</span>
+                <span className="tech-badge">Machine Learning</span>
+                <span className="tech-badge">IoT</span>
+                <span className="tech-badge">Computer Vision</span>
+              </div>
             </motion.div>
             <motion.div 
               className="relative w-72 h-72 mx-auto"
@@ -200,7 +206,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-2xl"
+                className="absolute inset-0 bg-gradient-to-r from-[rgb(var(--primary))]/20 to-[rgb(var(--secondary))]/20 rounded-full blur-2xl"
                 animate={{
                   scale: [1, 1.1, 1],
                   opacity: [0.5, 0.8, 0.5],
@@ -233,7 +239,7 @@ export default function Home() {
       <Achievements />
 
       {/* Contact Section */}
-      <section id="contact" className="section-padding">
+      <section id="contact" className="section-padding glass">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -247,7 +253,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Get In Touch
+              <span className="gradient-text">Get In Touch</span>
             </motion.h2>
             <motion.p 
               className="text-text-secondary mb-8"
@@ -255,7 +261,8 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              I'm currently open to new opportunities and collaborations.
+              I'm currently seeking opportunities in mechatronics engineering and robotics. Let's connect and discuss 
+              how we can work together to create innovative solutions.
             </motion.p>
             <motion.div 
               className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"
