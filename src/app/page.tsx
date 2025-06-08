@@ -53,11 +53,15 @@ export default function Home() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ delay: 0.5 }}
-        className="fixed top-0 w-full glass z-50 shadow-lg"
+        className="fixed top-0 w-full glass z-50"
       >
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <button onClick={() => scrollToSection('home')} className="text-2xl font-bold gradient-text">
+            <button 
+              onClick={() => scrollToSection('home')} 
+              className="text-2xl font-bold gradient-text focus:outline-none"
+              aria-label="Go to home section"
+            >
               Aashrith Raj
             </button>
             <div className="hidden md:flex space-x-8">
@@ -65,9 +69,10 @@ export default function Home() {
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
-                  className={`capitalize hover:text-[rgb(var(--primary))] transition-colors ${
+                  className={`nav-link ${
                     activeSection === section ? 'text-[rgb(var(--primary))]' : 'text-text-secondary'
                   }`}
+                  aria-label={`Go to ${section} section`}
                 >
                   {section}
                 </button>
@@ -113,7 +118,7 @@ export default function Home() {
               </span>
             </motion.h1>
             <motion.p 
-              className="text-xl text-text-secondary mb-12 leading-relaxed"
+              className="text-xl text-text-secondary mb-12"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
@@ -132,6 +137,7 @@ export default function Home() {
                 className="btn-primary group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label="View projects"
               >
                 View Projects
                 <motion.span
@@ -146,6 +152,7 @@ export default function Home() {
                 className="btn-outline group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label="Contact me"
               >
                 Contact Me
               </motion.button>
@@ -180,12 +187,12 @@ export default function Home() {
               <h2 className="heading-2">
                 <span className="gradient-text">About Me</span>
               </h2>
-              <p className="text-text-secondary text-lg leading-relaxed">
+              <p className="text-text-secondary text-lg">
                 I'm a dedicated student with a passion for mechatronics and robotics engineering. My journey in 
                 technology began with Arduino projects and has evolved into complex systems involving embedded 
                 programming, control systems, and machine learning.
               </p>
-              <p className="text-text-secondary text-lg leading-relaxed">
+              <p className="text-text-secondary text-lg">
                 I specialize in developing innovative solutions that bridge the gap between hardware and software. 
                 My projects range from autonomous robots to smart home systems, each demonstrating my ability to 
                 integrate mechanical, electrical, and software components effectively.
@@ -219,7 +226,7 @@ export default function Home() {
               ></motion.div>
               <Image
                 src="/Profile.png"
-                alt="Profile"
+                alt="Aashrith Raj - Mechatronics Engineering Student"
                 width={288}
                 height={288}
                 className="relative rounded-full border-4 border-white/10 shadow-xl"
@@ -275,6 +282,7 @@ export default function Home() {
                 className="btn-primary"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label="Send me an email"
               >
                 Send Me An Email
               </motion.a>
@@ -284,6 +292,7 @@ export default function Home() {
                 className="btn-outline"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label="Download my resume"
               >
                 Download Resume
               </motion.a>
