@@ -2,40 +2,36 @@ export interface Achievement {
   title: string;
   description: string;
   date: string;
+  icon: string;
   link?: string;
-  icon?: string;
-  image?: string;
 }
 
 export const achievements: Achievement[] = [
   {
     title: "Euclid Mathematics Contest",
-    description: "Participated in the prestigious Euclid Mathematics Contest, demonstrating strong problem-solving skills and mathematical aptitude.",
-    date: "2024",
+    description: "Received Certificate of Participation in the prestigious Euclid Mathematics Contest, demonstrating mathematical problem-solving skills.",
+    date: "2025",
     icon: "📐",
-    link: "/euclid",
-    image: "/images/euclid-certificate.jpg"
+    link: "/achievements/euclid"
   },
   {
-    title: "Blue Ocean",
-    description: "Led a team of 4 to develop a web application that helps users find and book sustainable travel experiences. Implemented user authentication, search functionality, and booking system.",
-    date: "2025",
+    title: "Blue Ocean Competition Finalist",
+    description: "Achieved top 350 placement in the Blue Ocean Competition for the Gaia Cure pitch, demonstrating innovative thinking in healthcare solutions.",
+    date: "2024",
     icon: "🏆",
-    link: "https://github.com/Tabulater/Blue-Ocean",
-    image: "/images/blue-ocean.png"
+    link: "#"
   },
   {
-    title: "Occasus",
-    description: "Developed a web application that helps users track and manage their daily tasks and goals. Implemented user authentication, task management, and progress tracking.",
-    date: "2025",
+    title: "Occaus Creative Writing Contest Winner",
+    description: "Won the fiction category at Western University's Occaus Creative Writing Contest for 'Glassblower's Ephemera', showcasing creative excellence.",
+    date: "2024",
     icon: "✍️",
-    link: "https://github.com/Tabulater/Occasus",
-    image: "/images/occasus.png"
+    link: "#"
   },
   {
-    title: "Principal's Honour Roll",
-    description: "Recognized twice for academic excellence by being named to the Principal's Honour Roll, demonstrating consistent high achievement.",
-    date: "2023-2024",
+    title: "Western University Dean's List",
+    description: "Achieved academic excellence by maintaining a GPA above 3.7, placing in the top 10% of students.",
+    date: "2024",
     icon: "🎓",
     link: "#"
   }
