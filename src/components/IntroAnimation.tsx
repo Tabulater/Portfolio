@@ -7,26 +7,33 @@ interface IntroAnimationProps {
   onComplete: () => void;
 }
 
+interface Particle {
+  x: number;
+  y: number;
+  targetX: number;
+  targetY: number;
+  size: number;
+  speedX: number;
+  speedY: number;
+  opacity: number;
+  isName: boolean;
+  color: string;
+  hue: number;
+  angle: number;
+  radius: number;
+  trail: Array<{ x: number; y: number; opacity: number }>;
+  rotationSpeed: number;
+  pulsePhase: number;
+  glowSize: number;
+}
+
 const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const [displayText, setDisplayText] = useState('');
   const [showParticles, setShowParticles] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
-  const particlesRef = useRef<Array<{
-    x: number;
-    y: number;
-    targetX: number;
-    targetY: number;
-    size: number;
-    speedX: number;
-    speedY: number;
-    opacity: number;
-    isName: boolean;
-    color: string;
-    hue: number;
-    angle: number;
-    radius: number;
-  }>>([]);
+  const particlesRef = useRef<Particle[]>([]);
+  const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -53,24 +60,32 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current = {
+        x: e.clientX,
+        y: e.clientY
+      };
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
 
     const createParticles = () => {
-      const particles = [];
+      const particles: Particle[] = [];
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
       // Create particles for the name
       const name = "Aashrith Raj";
-      const fontSize = 120; // Increased font size
+      const fontSize = 140; // Even larger font size
       ctx.font = `bold ${fontSize}px Arial`;
       const textWidth = ctx.measureText(name).width;
       const textHeight = fontSize;
 
-      // Create a temporary canvas to get pixel data
       const tempCanvas = document.createElement('canvas');
       const tempCtx = tempCanvas.getContext('2d');
       if (!tempCtx) return;
@@ -87,21 +102,21 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       const pixels = imageData.data;
 
       // Create particles for the name with higher density
-      for (let y = 0; y < textHeight; y += 2) {
-        for (let x = 0; x < textWidth; x += 2) {
+      for (let y = 0; y < textHeight; y += 1.5) { // Increased density
+        for (let x = 0; x < textWidth; x += 1.5) {
           const index = (y * textWidth + x) * 4;
           if (pixels[index + 3] > 128) {
             const targetX = centerX - textWidth / 2 + x;
             const targetY = centerY - textHeight / 2 + y;
             const angle = Math.random() * Math.PI * 2;
-            const radius = Math.random() * 300 + 200;
+            const radius = Math.random() * 400 + 300; // Increased radius
             
             particles.push({
               x: centerX + Math.cos(angle) * radius,
               y: centerY + Math.sin(angle) * radius,
               targetX,
               targetY,
-              size: 3,
+              size: 2.5,
               speedX: 0,
               speedY: 0,
               opacity: 1,
@@ -109,16 +124,20 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
               color: '#4F46E5',
               hue: Math.random() * 360,
               angle,
-              radius
+              radius,
+              trail: [],
+              rotationSpeed: (Math.random() - 0.5) * 0.02,
+              pulsePhase: Math.random() * Math.PI * 2,
+              glowSize: Math.random() * 2 + 1
             });
           }
         }
       }
 
       // Add background particles
-      for (let i = 0; i < 200; i++) {
+      for (let i = 0; i < 300; i++) { // More background particles
         const angle = Math.random() * Math.PI * 2;
-        const radius = Math.random() * 400;
+        const radius = Math.random() * 600; // Increased radius
         particles.push({
           x: centerX + Math.cos(angle) * radius,
           y: centerY + Math.sin(angle) * radius,
@@ -132,7 +151,11 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           color: 'rgba(79, 70, 229, 0.2)',
           hue: Math.random() * 360,
           angle,
-          radius
+          radius,
+          trail: [],
+          rotationSpeed: (Math.random() - 0.5) * 0.01,
+          pulsePhase: Math.random() * Math.PI * 2,
+          glowSize: Math.random() * 1.5
         });
       }
 
@@ -144,14 +167,34 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Draw background gradient
+      const gradient = ctx.createRadialGradient(
+        canvas.width / 2, canvas.height / 2, 0,
+        canvas.width / 2, canvas.height / 2, canvas.width / 2
+      );
+      gradient.addColorStop(0, 'rgba(17, 24, 39, 0.8)');
+      gradient.addColorStop(1, 'rgba(17, 24, 39, 0.4)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
       particlesRef.current.forEach(particle => {
+        // Update trail
+        particle.trail.unshift({ x: particle.x, y: particle.y, opacity: 1 });
+        if (particle.trail.length > 10) particle.trail.pop();
+
         // Calculate direction to target
         const dx = particle.targetX - particle.x;
         const dy = particle.targetY - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
+        // Mouse interaction
+        const mouseDx = mouseRef.current.x - particle.x;
+        const mouseDy = mouseRef.current.y - particle.y;
+        const mouseDistance = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
+        const mouseForce = Math.max(0, 1 - mouseDistance / 200) * 2;
+
         if (distance > 1) {
-          const speed = particle.isName ? 0.15 : 0.05;
+          const speed = particle.isName ? 0.12 : 0.04;
           particle.speedX = dx * speed;
           particle.speedY = dy * speed;
         } else {
@@ -159,18 +202,54 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           particle.speedY *= 0.95;
         }
 
+        // Apply mouse repulsion
+        if (mouseDistance < 200) {
+          particle.speedX -= (mouseDx / mouseDistance) * mouseForce;
+          particle.speedY -= (mouseDy / mouseDistance) * mouseForce;
+        }
+
         particle.x += particle.speedX;
         particle.y += particle.speedY;
 
-        // Update color based on position
+        // Update rotation and pulse
+        particle.angle += particle.rotationSpeed;
+        particle.pulsePhase += 0.05;
+        const pulse = Math.sin(particle.pulsePhase) * 0.5 + 1;
+
+        // Update color based on position and time
         if (particle.isName) {
           particle.hue = (particle.hue + 0.5) % 360;
-          particle.color = `hsl(${particle.hue}, 70%, 60%)`;
+          particle.color = `hsla(${particle.hue}, 70%, 60%, ${pulse * 0.8 + 0.2})`;
         }
 
+        // Draw trail
+        particle.trail.forEach((point, index) => {
+          const trailOpacity = (1 - index / particle.trail.length) * 0.3;
+          ctx.beginPath();
+          ctx.arc(point.x, point.y, particle.size * 0.8, 0, Math.PI * 2);
+          ctx.fillStyle = particle.isName 
+            ? `hsla(${particle.hue}, 70%, 60%, ${trailOpacity})`
+            : `rgba(79, 70, 229, ${trailOpacity * 0.2})`;
+          ctx.fill();
+        });
+
+        // Draw particle with glow
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.arc(particle.x, particle.y, particle.size * pulse, 0, Math.PI * 2);
         ctx.fillStyle = particle.color;
+        ctx.fill();
+
+        // Add glow effect
+        const glow = ctx.createRadialGradient(
+          particle.x, particle.y, 0,
+          particle.x, particle.y, particle.size * particle.glowSize * pulse
+        );
+        glow.addColorStop(0, particle.isName 
+          ? `hsla(${particle.hue}, 70%, 60%, 0.3)`
+          : 'rgba(79, 70, 229, 0.1)'
+        );
+        glow.addColorStop(1, 'transparent');
+        ctx.fillStyle = glow;
         ctx.fill();
       });
 
@@ -185,6 +264,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('mousemove', handleMouseMove);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
