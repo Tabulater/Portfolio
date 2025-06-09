@@ -85,9 +85,9 @@ body {
            hover:border-[rgb(var(--primary))]/30;
   }
 
-  .nav-link {
-    @apply capitalize hover:text-[rgb(var(--primary))] transition-colors
-           focus:outline-none focus:text-[rgb(var(--primary))];
+  .glass {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10
+           shadow-lg hover:shadow-xl transition-all duration-300;
   }
 }
 
@@ -146,12 +146,6 @@ body {
   color: rgb(var(--foreground-rgb));
 }
 
-/* Glass effect */
-.glass {
-  @apply bg-white/5 backdrop-blur-sm border border-white/10
-         shadow-lg hover:shadow-xl transition-all duration-300;
-}
-
 /* Gradient text */
 .gradient-text {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-[rgb(var(--primary))] to-[rgb(var(--secondary))];
@@ -172,28 +166,37 @@ body {
   @apply opacity-100;
 }
 
+/* Smooth transitions */
+* {
+  @apply transition-colors duration-200;
+}
+
 /* Focus styles */
-*:focus-visible {
+:focus-visible {
   @apply outline-none ring-2 ring-[rgb(var(--primary))]/50 ring-offset-2 ring-offset-[rgb(var(--background-start-rgb))];
 }
 
-/* Smooth transitions */
-.transition-all {
-  @apply transition-all duration-300 ease-in-out;
-}
-
-/* Improved button hover states */
-.btn-primary:hover,
-.btn-outline:hover {
+/* Button hover effects */
+.btn-primary:hover, .btn-outline:hover {
   @apply transform -translate-y-0.5;
 }
 
-/* Improved card hover states */
+/* Card hover effects */
 .card:hover {
   @apply transform -translate-y-1;
 }
 
 /* Improved text readability */
-.text-text-secondary {
+p {
   @apply leading-relaxed;
+}
+
+/* Improved spacing */
+section {
+  @apply space-y-8;
+}
+
+/* Improved button accessibility */
+button, a {
+  @apply focus:outline-none focus:ring-2 focus:ring-[rgb(var(--primary))]/50 focus:ring-offset-2 focus:ring-offset-[rgb(var(--background-start-rgb))];
 } 

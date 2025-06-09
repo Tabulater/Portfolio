@@ -1,240 +1,156 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { useState } from 'react';
-import Image from 'next/image';
-import IntroAnimation from '@/components/IntroAnimation';
-import SocialLinks from '@/components/SocialLinks';
-import Achievements from '@/components/Achievements';
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
 import Projects from '@/components/Projects';
+import { achievements } from '@/data/achievements';
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState('home');
-  const [showIntro, setShowIntro] = useState(true);
-  const [ref, inView] = useInView({
-    threshold: 0.5,
-    triggerOnce: true,
-  });
-
-  const handleIntroComplete = () => {
-    setShowIntro(false);
-  };
-
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const yOffset = -80;
-      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      
-      section.style.transform = 'scale(0.95)';
-      section.style.opacity = '0.8';
-      
-      window.scrollTo({
-        top: y,
-        behavior: 'smooth'
-      });
-
-      setTimeout(() => {
-        section.style.transform = 'scale(1)';
-        section.style.opacity = '1';
-      }, 1000);
-
-      setActiveSection(sectionId);
-    }
-  };
-
   return (
-    <div className="relative">
-      {showIntro && <IntroAnimation onComplete={handleIntroComplete} />}
-      
-      {/* Professional Navigation Bar */}
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="fixed top-0 w-full glass z-50"
-      >
+    <main className="min-h-screen">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <button 
-              onClick={() => scrollToSection('home')} 
-              className="text-2xl font-bold gradient-text focus:outline-none"
-              aria-label="Go to home section"
+            <motion.a
+              href="#"
+              className="text-2xl font-bold gradient-text"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Aashrith Raj
-            </button>
-            <div className="hidden md:flex space-x-8">
-              {['home', 'about', 'projects', 'contact'].map((section) => (
-                <button
-                  key={section}
-                  onClick={() => scrollToSection(section)}
-                  className={`nav-link ${
-                    activeSection === section ? 'text-[rgb(var(--primary))]' : 'text-text-secondary'
-                  }`}
-                  aria-label={`Go to ${section} section`}
-                >
-                  {section}
-                </button>
-              ))}
+              Aashrith
+            </motion.a>
+            <div className="flex gap-6">
+              <motion.a
+                href="#about"
+                className="text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                About
+              </motion.a>
+              <motion.a
+                href="#projects"
+                className="text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Projects
+              </motion.a>
+              <motion.a
+                href="#achievements"
+                className="text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Achievements
+              </motion.a>
+              <motion.a
+                href="#contact"
+                className="text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Contact
+              </motion.a>
             </div>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center section-padding relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--background-start-rgb))] via-[rgb(var(--background-end-rgb))] to-[rgb(var(--primary))]/10"></div>
-          <div className="absolute inset-0">
-            <div className="absolute top-0 -left-4 w-72 h-72 bg-[rgb(var(--primary))]/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-            <div className="absolute top-0 -right-4 w-72 h-72 bg-[rgb(var(--secondary))]/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-[rgb(var(--accent))]/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-          </div>
-        </div>
-        
-        <div className="container relative z-10">
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/5 to-[rgb(var(--secondary))]/5"></div>
+        <div className="container mx-auto px-4 py-32 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-2xl"
+            className="max-w-4xl mx-auto text-center"
           >
-            <motion.h1 
-              className="heading-1 mb-8"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-            >
-              Aspiring{' '}
-              <span className="gradient-text relative inline-block">
-                Mechatronics Engineer
-                <motion.span
-                  className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[rgb(var(--primary))] to-[rgb(var(--secondary))]"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                />
-              </span>
-            </motion.h1>
-            <motion.p 
-              className="text-xl text-text-secondary mb-12"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              Passionate about robotics, automation, and embedded systems. Currently developing innovative solutions 
-              that combine mechanical, electrical, and software engineering principles.
-            </motion.p>
-            <motion.div 
-              className="flex space-x-6 mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-            >
-              <motion.button 
-                onClick={() => scrollToSection('projects')} 
-                className="btn-primary group"
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              <span className="gradient-text">Aspiring Mechatronics Engineer</span>
+            </h1>
+            <p className="text-text-secondary text-xl md:text-2xl mb-12 leading-relaxed">
+              Passionate about robotics, automation, and embedded systems. 
+              Building innovative solutions that bridge the gap between hardware and software.
+            </p>
+            <div className="flex justify-center gap-6">
+              <motion.a
+                href="#projects"
+                className="btn-primary"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                aria-label="View projects"
               >
                 View Projects
-                <motion.span
-                  className="inline-block ml-2 group-hover:translate-x-1 transition-transform"
-                  initial={{ x: 0 }}
-                >
-                  →
-                </motion.span>
-              </motion.button>
-              <motion.button 
-                onClick={() => scrollToSection('contact')} 
-                className="btn-outline group"
+              </motion.a>
+              <motion.a
+                href="#contact"
+                className="btn-outline"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                aria-label="Contact me"
               >
                 Contact Me
-              </motion.button>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-            >
-              <SocialLinks />
-            </motion.div>
+              </motion.a>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="section-padding glass">
+      <section id="about" className="section-padding">
         <div className="container">
           <motion.div
-            ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="grid md:grid-cols-2 gap-16 items-center"
+            className="max-w-4xl mx-auto text-center mb-16"
           >
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-6"
-            >
-              <h2 className="heading-2">
-                <span className="gradient-text">About Me</span>
-              </h2>
-              <p className="text-text-secondary text-lg">
-                I'm a dedicated student with a passion for mechatronics and robotics engineering. My journey in 
-                technology began with Arduino projects and has evolved into complex systems involving embedded 
-                programming, control systems, and machine learning.
-              </p>
-              <p className="text-text-secondary text-lg">
-                I specialize in developing innovative solutions that bridge the gap between hardware and software. 
-                My projects range from autonomous robots to smart home systems, each demonstrating my ability to 
-                integrate mechanical, electrical, and software components effectively.
-              </p>
-              <div className="flex flex-wrap gap-4 mt-8">
-                <span className="tech-badge">Embedded Systems</span>
-                <span className="tech-badge">Robotics</span>
-                <span className="tech-badge">Control Systems</span>
-                <span className="tech-badge">Machine Learning</span>
-                <span className="tech-badge">IoT</span>
-                <span className="tech-badge">Computer Vision</span>
+            <h2 className="heading-2 mb-6">
+              <span className="gradient-text">About Me</span>
+            </h2>
+            <p className="text-text-secondary text-lg leading-relaxed">
+              I am a passionate mechatronics engineering student with a strong foundation in robotics, 
+              automation, and embedded systems. My journey in engineering has been driven by a desire 
+              to create innovative solutions that combine mechanical, electrical, and software components.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="card p-8">
+              <h3 className="text-2xl font-bold text-[rgb(var(--primary))] mb-6">Technical Skills</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {[
+                  'Robotics',
+                  'Embedded Systems',
+                  'Control Systems',
+                  'CAD/CAM',
+                  'Python',
+                  'C++',
+                  'Arduino',
+                  'Raspberry Pi',
+                  'ROS',
+                  'Machine Learning',
+                  'Computer Vision',
+                  'IoT'
+                ].map((skill) => (
+                  <motion.div
+                    key={skill}
+                    className="tech-badge"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {skill}
+                  </motion.div>
+                ))}
               </div>
-            </motion.div>
-            <motion.div 
-              className="relative w-72 h-72 mx-auto"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-[rgb(var(--primary))]/20 to-[rgb(var(--secondary))]/20 rounded-full blur-2xl"
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.5, 0.8, 0.5],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              ></motion.div>
-              <Image
-                src="/Profile.png"
-                alt="Aashrith Raj - Mechatronics Engineering Student"
-                width={288}
-                height={288}
-                className="relative rounded-full border-4 border-white/10 shadow-xl"
-                priority
-                quality={100}
-                style={{ objectFit: 'cover' }}
-              />
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -242,64 +158,108 @@ export default function Home() {
       {/* Projects Section */}
       <Projects />
 
-      {/* Achievements & Education Section */}
-      <Achievements />
-
-      {/* Contact Section */}
-      <section id="contact" className="section-padding glass">
+      {/* Achievements Section */}
+      <section id="achievements" className="section-padding">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-2xl mx-auto text-center"
+            className="max-w-4xl mx-auto text-center mb-16"
           >
-            <motion.h2 
-              className="heading-2 mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <span className="gradient-text">Get In Touch</span>
-            </motion.h2>
-            <motion.p 
-              className="text-text-secondary mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              I'm currently seeking opportunities in mechatronics engineering and robotics. Let's connect and discuss 
-              how we can work together to create innovative solutions.
-            </motion.p>
-            <motion.div 
-              className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              <motion.a 
-                href="mailto:napoleonbonaporte42@gmail.com" 
-                className="btn-primary"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label="Send me an email"
+            <h2 className="heading-2 mb-6">
+              <span className="gradient-text">Achievements</span>
+            </h2>
+            <p className="text-text-secondary text-lg leading-relaxed">
+              Recognition for my contributions to engineering and technology, 
+              demonstrating my commitment to excellence and innovation.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {achievements.map((achievement, index) => (
+              <motion.div
+                key={achievement.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
               >
-                Send Me An Email
-              </motion.a>
-              <motion.a 
-                href="/Resume.pdf" 
-                download 
+                <div className="card p-6 hover:scale-[1.02] transition-transform duration-300">
+                  <h3 className="text-xl font-bold text-[rgb(var(--primary))] mb-2">
+                    {achievement.title}
+                  </h3>
+                  <p className="text-text-secondary leading-relaxed">
+                    {achievement.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="section-padding">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <h2 className="heading-2 mb-6">
+              <span className="gradient-text">Get in Touch</span>
+            </h2>
+            <p className="text-text-secondary text-lg leading-relaxed mb-12">
+              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+            </p>
+            <div className="flex justify-center gap-6">
+              <motion.a
+                href="https://github.com/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-outline"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                aria-label="Download my resume"
               >
-                Download Resume
+                <FaGithub className="w-5 h-5" />
+                GitHub
               </motion.a>
-            </motion.div>
+              <motion.a
+                href="https://linkedin.com/in/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaLinkedin className="w-5 h-5" />
+                LinkedIn
+              </motion.a>
+              <motion.a
+                href="https://leetcode.com/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <SiLeetcode className="w-5 h-5" />
+                LeetCode
+              </motion.a>
+              <motion.a
+                href="mailto:your.email@example.com"
+                className="btn-outline"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaEnvelope className="w-5 h-5" />
+                Email
+              </motion.a>
+            </div>
           </motion.div>
         </div>
       </section>
-    </div>
+    </main>
   );
 } 

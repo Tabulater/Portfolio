@@ -22,9 +22,10 @@ export default function Projects() {
           <h2 className="heading-2 mb-6">
             <span className="gradient-text">Engineering Projects</span>
           </h2>
-          <p className="text-text-secondary text-lg">
+          <p className="text-text-secondary text-lg leading-relaxed">
             A showcase of my technical projects, demonstrating my passion for mechatronics, 
-            robotics, and software development.
+            robotics, and software development. Each project represents a unique challenge 
+            and learning opportunity in the field of engineering.
           </p>
         </motion.div>
 
@@ -125,7 +126,7 @@ export default function Projects() {
                     <h3 className="text-xl font-bold text-[rgb(var(--primary))] mb-2">
                       {project.title}
                     </h3>
-                    <p className="text-text-secondary">
+                    <p className="text-text-secondary leading-relaxed">
                       {project.description}
                     </p>
                   </div>
