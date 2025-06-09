@@ -15,7 +15,7 @@ export default function Home() {
 
   if (showIntro) {
     return <IntroAnimation onComplete={() => setShowIntro(false)} />;
-  }
+    }
 
   return (
     <main className="min-h-screen">
@@ -116,18 +116,18 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center mb-16"
-          >
+            >
             <h2 className="heading-2 mb-6">
               <span className="gradient-text">About Me</span>
             </h2>
-            <p className="text-text-secondary text-lg leading-relaxed">
+              <p className="text-text-secondary text-lg leading-relaxed">
               I am a passionate mechatronics engineering student with a strong foundation in robotics, 
               automation, and embedded systems. My journey in engineering has been driven by a desire 
               to create innovative solutions that combine mechanical, electrical, and software components.
-            </p>
-          </motion.div>
+              </p>
+            </motion.div>
 
-          <motion.div
+            <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -136,16 +136,16 @@ export default function Home() {
             <div className="card p-8">
               <div className="grid md:grid-cols-2 gap-12 items-center mb-8">
                 <div className="relative w-72 h-72 mx-auto">
-                  <Image
-                    src="/Profile.png"
-                    alt="Profile"
-                    width={288}
-                    height={288}
+              <Image
+                src="/Profile.png"
+                alt="Profile"
+                width={288}
+                height={288}
                     className="rounded-full border-4 border-white/10 shadow-xl"
-                    priority
-                    quality={100}
-                    style={{ objectFit: 'cover' }}
-                  />
+                priority
+                quality={100}
+                style={{ objectFit: 'cover' }}
+              />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-[rgb(var(--primary))] mb-4">Technical Skills</h3>
@@ -171,7 +171,7 @@ export default function Home() {
                         whileTap={{ scale: 0.95 }}
                       >
                         {skill}
-                      </motion.div>
+            </motion.div>
                     ))}
                   </div>
                 </div>
@@ -219,10 +219,10 @@ export default function Home() {
             ].map((achievement, index) => (
               <motion.div
                 key={achievement.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
-              >
+            >
                 <div className="card p-6 hover:scale-[1.02] transition-transform duration-300">
                   <h3 className="text-xl font-bold text-[rgb(var(--primary))] mb-2">
                     {achievement.title}

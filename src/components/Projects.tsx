@@ -56,9 +56,9 @@ export default function Projects() {
                   <h3 className="text-2xl font-bold text-[rgb(var(--primary))] mb-2">
                     {featuredProjects[0]?.title}
                   </h3>
-                  <p className="text-text-secondary text-lg leading-relaxed">
-                    {featuredProjects[0]?.description}
-                  </p>
+                <p className="text-text-secondary text-lg leading-relaxed">
+                  {featuredProjects[0]?.description}
+                </p>
                 </div>
                 <div className="flex flex-wrap gap-3">
                   {featuredProjects[0]?.technologies.map((tech) => (
@@ -127,8 +127,8 @@ export default function Projects() {
                       {project.title}
                     </h3>
                     <p className="text-text-secondary leading-relaxed">
-                      {project.description}
-                    </p>
+                    {project.description}
+                  </p>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
