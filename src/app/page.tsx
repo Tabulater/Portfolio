@@ -5,19 +5,11 @@ import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 import Image from 'next/image';
 import Projects from '@/components/Projects';
-import { useState } from 'react';
-import IntroAnimation from '@/components/IntroAnimation';
 import { contactInfo } from '@/data/contact';
 import { MdEmail } from 'react-icons/md';
 import { achievements } from '@/data/achievements';
 
 export default function Home() {
-  const [showIntro, setShowIntro] = useState(true);
-
-  if (showIntro) {
-    return <IntroAnimation onComplete={() => setShowIntro(false)} />;
-    }
-
   return (
     <main className="min-h-screen">
       {/* Navigation */}
