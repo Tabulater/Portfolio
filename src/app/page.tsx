@@ -6,8 +6,16 @@ import { SiLeetcode } from 'react-icons/si';
 import Image from 'next/image';
 import Projects from '@/components/Projects';
 import { achievements } from '@/data/achievements';
+import { useState } from 'react';
+import IntroAnimation from '@/components/IntroAnimation';
 
 export default function Home() {
+  const [showIntro, setShowIntro] = useState(true);
+
+  if (showIntro) {
+    return <IntroAnimation onComplete={() => setShowIntro(false)} />;
+  }
+
   return (
     <main className="min-h-screen">
       {/* Navigation */}
