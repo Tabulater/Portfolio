@@ -9,6 +9,7 @@ import { useState } from 'react';
 import IntroAnimation from '@/components/IntroAnimation';
 import { contactInfo } from '@/data/contact';
 import { MdEmail } from 'react-icons/md';
+import { achievements } from '@/data/achievements';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
@@ -203,33 +204,34 @@ export default function Home() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {[
-              {
-                title: "Blue Ocean Competition Finalist",
-                description: "Achieved top 350 placement in the Blue Ocean Competition for the Gaia Cure pitch, demonstrating innovative thinking in healthcare solutions."
-              },
-              {
-                title: "Occaus Creative Writing Contest Winner",
-                description: "Won the fiction category at Western University's Occaus Creative Writing Contest for 'Glassblower's Ephemera', showcasing creative excellence."
-              },
-              {
-                title: "Principal's Honour Roll",
-                description: "Recognized twice for academic excellence by being named to the Principal's Honour Roll, demonstrating consistent high achievement."
-              }
-            ].map((achievement, index) => (
+            {achievements.map((achievement, index) => (
               <motion.div
                 key={achievement.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
-            >
+              >
                 <div className="card p-6 hover:scale-[1.02] transition-transform duration-300">
-                  <h3 className="text-xl font-bold text-[rgb(var(--primary))] mb-2">
-                    {achievement.title}
-                  </h3>
-                  <p className="text-text-secondary leading-relaxed">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-3xl">{achievement.icon}</span>
+                    <h3 className="text-xl font-bold text-[rgb(var(--primary))]">
+                      {achievement.title}
+                    </h3>
+                  </div>
+                  <p className="text-text-secondary leading-relaxed mb-4">
                     {achievement.description}
                   </p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-400">{achievement.date}</span>
+                    {achievement.link && (
+                      <a
+                        href={achievement.link}
+                        className="text-[rgb(var(--primary))] hover:text-[rgb(var(--primary))]/80 transition-colors flex items-center gap-2"
+                      >
+                        Learn More →
+                      </a>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             ))}
