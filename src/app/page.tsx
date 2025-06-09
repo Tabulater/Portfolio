@@ -209,8 +209,8 @@ export default function Home() {
                 description: "Achieved top 350 placement in the Blue Ocean Competition for the Gaia Cure pitch, demonstrating innovative thinking in healthcare solutions."
               },
               {
-                title: "OCCAS Creative Writing Contest Winner",
-                description: "Won the fiction category at Western University's OCCAS Creative Writing Contest for 'Glassblower's Ephemera', showcasing creative excellence."
+                title: "Occaus Creative Writing Contest Winner",
+                description: "Won the fiction category at Western University's Occaus Creative Writing Contest for 'Glassblower's Ephemera', showcasing creative excellence."
               },
               {
                 title: "Principal's Honour Roll",
