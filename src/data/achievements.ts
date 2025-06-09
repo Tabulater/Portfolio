@@ -4,29 +4,33 @@ export interface Achievement {
   date: string;
   link?: string;
   icon?: string;
+  image?: string;
 }
 
 export const achievements: Achievement[] = [
   {
     title: "Euclid Mathematics Contest",
-    description: "Received Certificate of Participation in the prestigious Euclid Mathematics Contest, demonstrating mathematical problem-solving skills.",
-    date: "2025",
+    description: "Participated in the prestigious Euclid Mathematics Contest, demonstrating strong problem-solving skills and mathematical aptitude.",
+    date: "2024",
     icon: "📐",
-    link: "/achievements/euclid"
+    link: "/euclid",
+    image: "/images/euclid-certificate.jpg"
   },
   {
-    title: "Blue Ocean Competition Finalist",
-    description: "Achieved top 350 placement in the Blue Ocean Competition for the Gaia Cure pitch, demonstrating innovative thinking in healthcare solutions.",
-    date: "2024",
+    title: "Blue Ocean",
+    description: "Led a team of 4 to develop a web application that helps users find and book sustainable travel experiences. Implemented user authentication, search functionality, and booking system.",
+    date: "2025",
     icon: "🏆",
-    link: "#"
+    link: "https://github.com/Tabulater/Blue-Ocean",
+    image: "/images/blue-ocean.png"
   },
   {
-    title: "Occaus Creative Writing Contest Winner",
-    description: "Won the fiction category at Western University's Occaus Creative Writing Contest for 'Glassblower's Ephemera', showcasing creative excellence.",
-    date: "2024",
+    title: "Occasus",
+    description: "Developed a web application that helps users track and manage their daily tasks and goals. Implemented user authentication, task management, and progress tracking.",
+    date: "2025",
     icon: "✍️",
-    link: "#"
+    link: "https://github.com/Tabulater/Occasus",
+    image: "/images/occasus.png"
   },
   {
     title: "Principal's Honour Roll",

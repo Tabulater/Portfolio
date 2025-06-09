@@ -16,7 +16,7 @@ export default function EuclidPage() {
       <div className="max-w-4xl mx-auto">
         <motion.button
           onClick={handleBack}
-          className="mb-8 text-blue-600 hover:text-blue-800 flex items-center"
+          className="mb-8 text-gray-700 hover:text-gray-900 flex items-center"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
