@@ -5,7 +5,6 @@ import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 import Image from 'next/image';
 import Projects from '@/components/Projects';
-import { achievements } from '@/data/achievements';
 import { useState } from 'react';
 import IntroAnimation from '@/components/IntroAnimation';
 
@@ -202,7 +201,20 @@ export default function Home() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {achievements.map((achievement, index) => (
+            {[
+              {
+                title: "Blue Ocean Competition Finalist",
+                description: "Achieved top 350 placement in the Blue Ocean Competition for the Gaia Cure pitch, demonstrating innovative thinking in healthcare solutions."
+              },
+              {
+                title: "OCCAS Creative Writing Contest Winner",
+                description: "Won the fiction category at Western University's OCCAS Creative Writing Contest for 'Glassblower's Ephemera', showcasing creative excellence."
+              },
+              {
+                title: "Principal's Honour Roll",
+                description: "Recognized twice for academic excellence by being named to the Principal's Honour Roll, demonstrating consistent high achievement."
+              }
+            ].map((achievement, index) => (
               <motion.div
                 key={achievement.title}
                 initial={{ opacity: 0, y: 20 }}
