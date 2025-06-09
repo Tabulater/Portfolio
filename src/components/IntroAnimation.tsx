@@ -57,13 +57,12 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
     const createParticles = () => {
       const particles = [];
-      const particleCount = 300;
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
       // Create particles for the name
       const name = "Aashrith Raj";
-      const fontSize = 80;
+      const fontSize = 100; // Increased font size
       ctx.font = `bold ${fontSize}px Arial`;
       const textWidth = ctx.measureText(name).width;
       const textHeight = fontSize;
@@ -84,9 +83,9 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       const imageData = tempCtx.getImageData(0, 0, textWidth, textHeight);
       const pixels = imageData.data;
 
-      // Create particles for the name
-      for (let y = 0; y < textHeight; y += 4) {
-        for (let x = 0; x < textWidth; x += 4) {
+      // Create particles for the name with higher density
+      for (let y = 0; y < textHeight; y += 2) { // Reduced spacing between particles
+        for (let x = 0; x < textWidth; x += 2) {
           const index = (y * textWidth + x) * 4;
           if (pixels[index + 3] > 128) { // If pixel is not transparent
             const targetX = centerX - textWidth / 2 + x;
@@ -97,19 +96,19 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
               y: Math.random() * canvas.height,
               targetX,
               targetY,
-              size: Math.random() * 2 + 2,
+              size: 3, // Fixed size for better visibility
               speedX: 0,
               speedY: 0,
               opacity: 1,
               isName: true,
-              color: `hsl(${Math.random() * 60 + 200}, 100%, 70%)` // Blue to purple gradient
+              color: '#4F46E5' // Indigo color for better visibility
             });
           }
         }
       }
 
       // Add background particles
-      for (let i = 0; i < particleCount * 0.3; i++) {
+      for (let i = 0; i < 100; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
@@ -118,9 +117,9 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           size: Math.random() * 2 + 1,
           speedX: 0,
           speedY: 0,
-          opacity: Math.random() * 0.3 + 0.1,
+          opacity: 0.2,
           isName: false,
-          color: 'rgba(var(--primary), 0.3)'
+          color: 'rgba(79, 70, 229, 0.2)' // Matching background color
         });
       }
 
@@ -139,7 +138,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance > 1) {
-          const speed = particle.isName ? 0.15 : 0.05;
+          const speed = particle.isName ? 0.2 : 0.05; // Faster movement for name particles
           particle.speedX = dx * speed;
           particle.speedY = dy * speed;
         } else {
