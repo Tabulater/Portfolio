@@ -2,27 +2,42 @@ export interface Project {
   title: string;
   description: string;
   technologies: string[];
-  featured: boolean;
+  featured?: boolean;
   link: string;
   github?: string;
+  live?: string;
+  image: string;
 }
 
 export const projects: Project[] = [
   {
     title: "Thermal Feedback Glove",
-    description: "Developed an innovative haptic feedback glove designed to help patients with peripheral neuropathy. Integrated Peltier elements and temperature sensors to provide precise thermal feedback, creating a therapeutic device for sensory rehabilitation.",
-    technologies: ["Arduino", "C++", "Embedded Systems", "Thermal Control", "Medical Devices"],
+    description: "An innovative haptic feedback system that provides temperature sensations through a wearable glove interface.",
+    technologies: ["Arduino", "C++", "3D Printing", "Electronics"],
     featured: true,
     link: "#",
-    github: "https://github.com/Tabulater/thermal-glove"
+    github: "https://github.com/yourusername/thermal-glove",
+    image: "/images/thermal-glove.jpg"
+  },
+  {
+    title: "Smart Home Automation",
+    description: "A comprehensive home automation system with voice control and energy optimization features.",
+    technologies: ["Python", "Raspberry Pi", "IoT", "MQTT"],
+    featured: true,
+    link: "#",
+    github: "https://github.com/yourusername/smart-home",
+    live: "https://smart-home-demo.com",
+    image: "/images/smart-home.jpg"
   },
   {
     title: "Portfolio Website",
-    description: "Developed a modern, responsive portfolio website using Next.js and Tailwind CSS. Implemented smooth animations, glass-morphism effects, and a clean, professional design to showcase my projects and skills.",
-    technologies: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Framer Motion"],
+    description: "A modern, responsive portfolio website built with Next.js and Tailwind CSS.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     featured: true,
     link: "https://aashrith-raj.vercel.app",
-    github: "https://github.com/Tabulater/Portfolio"
+    github: "https://github.com/Tabulater/Portfolio",
+    live: "https://your-portfolio.com",
+    image: "/images/portfolio.jpg"
   },
   {
     title: "Emergency Response Drone",
@@ -30,7 +45,8 @@ export const projects: Project[] = [
     technologies: ["Computer Vision", "Python", "ROS", "Embedded Systems", "Autonomous Navigation"],
     featured: false,
     link: "#",
-    github: "https://github.com/Tabulater/emergency-drone"
+    github: "https://github.com/Tabulater/emergency-drone",
+    image: "/images/emergency-drone.jpg"
   },
   {
     title: "Smart Prosthetic Hand",
@@ -38,7 +54,8 @@ export const projects: Project[] = [
     technologies: ["3D Printing", "Machine Learning", "EMG Sensors", "Arduino", "Python"],
     featured: false,
     link: "#",
-    github: "https://github.com/Tabulater/smart-prosthetic"
+    github: "https://github.com/Tabulater/smart-prosthetic",
+    image: "/images/smart-prosthetic.jpg"
   },
   {
     title: "Water Quality Monitoring System",
@@ -46,6 +63,7 @@ export const projects: Project[] = [
     technologies: ["IoT", "Solar Power", "Data Analytics", "Cloud Computing", "Embedded Systems"],
     featured: false,
     link: "#",
-    github: "https://github.com/Tabulater/water-monitor"
+    github: "https://github.com/Tabulater/water-monitor",
+    image: "/images/water-monitor.jpg"
   }
 ]; 
