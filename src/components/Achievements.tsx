@@ -1,84 +1,55 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 import { achievements } from '@/data/achievements';
 
-export default function Achievements() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(1); // 1 for right, -1 for left
-
-  const nextAchievement = () => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % achievements.length);
-  };
-
-  const prevAchievement = () => {
-    setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + achievements.length) % achievements.length);
-  };
-
+const Achievements = () => {
   return (
-    <section id="achievements" className="section-padding bg-primary/50">
-      <div className="container">
-        <motion.div
+    <section id="achievements" className="py-20 bg-background">
+      <div className="container mx-auto px-4">
+        <motion.h2 
+          className="text-4xl font-bold mb-12 text-center gradient-text"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto space-y-16"
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
         >
-          <motion.h2 
-            className="heading-2 text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Achievements
-          </motion.h2>
-          
-          <div className="flex items-center gap-4">
-            {/* Left Arrow */}
-            <motion.button
-              onClick={prevAchievement}
-              className="p-3 rounded-full bg-secondary/20 text-secondary hover:bg-secondary/30 transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+          Achievements
+        </motion.h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {achievements.map((achievement, index) => (
+            <motion.div
+              key={index}
+              className="bg-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <FaChevronLeft className="w-6 h-6" />
-            </motion.button>
-
-            {/* Achievement Card */}
-            <div className="flex-1 overflow-hidden">
-              <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
-                  key={currentIndex}
-                  initial={{ opacity: 0, x: direction * 100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -direction * 100 }}
-                  transition={{ duration: 0.5 }}
-                  className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
-                >
-                  <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">{achievements[currentIndex].title}</h3>
-                    <p className="text-text-secondary">{achievements[currentIndex].description}</p>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Right Arrow */}
-            <motion.button
-              onClick={nextAchievement}
-              className="p-3 rounded-full bg-secondary/20 text-secondary hover:bg-secondary/30 transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaChevronRight className="w-6 h-6" />
-            </motion.button>
-          </div>
-        </motion.div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-3xl">{achievement.icon}</span>
+                <h3 className="text-xl font-semibold text-primary">{achievement.title}</h3>
+              </div>
+              <p className="text-gray-300 mb-4">{achievement.description}</p>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-400">{achievement.date}</span>
+                {achievement.link && (
+                  <a
+                    href={achievement.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 transition-colors"
+                  >
+                    Learn More →
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
-}
+};
+
+export default Achievements;
