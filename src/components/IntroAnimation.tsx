@@ -7,58 +7,40 @@ interface IntroAnimationProps {
   onComplete: () => void;
 }
 
-const phrases = [
-  "Engineering the future...",
-  "Building robots...",
-  "Let's create!"
-];
-
 const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
-  const [currentPhrase, setCurrentPhrase] = useState(0);
   const [displayText, setDisplayText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
   const [showParticles, setShowParticles] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
   const particlesRef = useRef<Array<{
     x: number;
     y: number;
+    targetX: number;
+    targetY: number;
     size: number;
     speedX: number;
     speedY: number;
     opacity: number;
+    isName: boolean;
   }>>([]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
-    const currentPhraseText = phrases[currentPhrase];
+    const phrase = "Engineering the Future";
 
-    if (!isDeleting && displayText === currentPhraseText) {
+    if (displayText.length < phrase.length) {
       timeout = setTimeout(() => {
-        setIsDeleting(true);
-      }, 800);
-    } else if (isDeleting && displayText === '') {
-      setIsDeleting(false);
-      setCurrentPhrase((prev) => (prev + 1) % phrases.length);
+        setDisplayText(phrase.substring(0, displayText.length + 1));
+      }, 50);
     } else {
-      const delta = isDeleting ? -1 : 1;
+      setShowParticles(true);
       timeout = setTimeout(() => {
-        setDisplayText(currentPhraseText.substring(0, displayText.length + delta));
-      }, isDeleting ? 30 : 50);
+        onComplete();
+      }, 1500);
     }
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentPhrase]);
-
-  useEffect(() => {
-    if (currentPhrase === phrases.length - 1 && displayText === phrases[phrases.length - 1]) {
-      setShowParticles(true);
-      const timeout = setTimeout(() => {
-        onComplete();
-      }, 1000);
-      return () => clearTimeout(timeout);
-    }
-  }, [currentPhrase, displayText, onComplete]);
+  }, [displayText, onComplete]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -74,16 +56,43 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
     const createParticles = () => {
       const particles = [];
-      const particleCount = 100;
+      const particleCount = 200;
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+
+      // Create particles for the name
+      const name = "Aashrith Raj";
+      const fontSize = 60;
+      ctx.font = `${fontSize}px Arial`;
+      const textWidth = ctx.measureText(name).width;
+      const textHeight = fontSize;
 
       for (let i = 0; i < particleCount; i++) {
+        const isName = i < particleCount * 0.7; // 70% of particles form the name
+        let targetX, targetY;
+
+        if (isName) {
+          // Position particles to form the name
+          const x = centerX - textWidth / 2 + Math.random() * textWidth;
+          const y = centerY - textHeight / 2 + Math.random() * textHeight;
+          targetX = x;
+          targetY = y;
+        } else {
+          // Random positions for background particles
+          targetX = Math.random() * canvas.width;
+          targetY = Math.random() * canvas.height;
+        }
+
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 4 + 1,
-          speedX: (Math.random() - 0.5) * 4,
-          speedY: (Math.random() - 0.5) * 4,
-          opacity: Math.random() * 0.7 + 0.3
+          targetX,
+          targetY,
+          size: isName ? Math.random() * 2 + 1 : Math.random() * 3 + 1,
+          speedX: 0,
+          speedY: 0,
+          opacity: isName ? 1 : Math.random() * 0.5 + 0.2,
+          isName
         });
       }
 
@@ -96,13 +105,21 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particlesRef.current.forEach(particle => {
+        // Calculate direction to target
+        const dx = particle.targetX - particle.x;
+        const dy = particle.targetY - particle.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance > 1) {
+          particle.speedX = dx * 0.1;
+          particle.speedY = dy * 0.1;
+        } else {
+          particle.speedX *= 0.95;
+          particle.speedY *= 0.95;
+        }
+
         particle.x += particle.speedX;
         particle.y += particle.speedY;
-
-        if (particle.x < 0) particle.x = canvas.width;
-        if (particle.x > canvas.width) particle.x = 0;
-        if (particle.y < 0) particle.y = canvas.height;
-        if (particle.y > canvas.height) particle.y = 0;
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
