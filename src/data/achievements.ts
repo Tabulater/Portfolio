@@ -10,7 +10,7 @@ export const achievements: Achievement[] = [
   {
     title: "Euclid Mathematics Contest",
     description: "Received Certificate of Participation in the prestigious Euclid Mathematics Contest, demonstrating mathematical problem-solving skills.",
-    date: "2024",
+    date: "2025",
     icon: "📐",
     link: "/achievements/euclid"
   },

@@ -9,9 +9,12 @@ export default function EuclidPage() {
           {/* Back button */}
           <Link 
             href="/#achievements"
-            className="inline-flex items-center text-primary hover:text-primary/80 mb-8 transition-colors"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-8 transition-colors bg-card/50 px-4 py-2 rounded-lg hover:bg-card/70"
           >
-            ← Back to Achievements
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Achievements
           </Link>
 
           {/* Header */}
@@ -19,7 +22,7 @@ export default function EuclidPage() {
             <h1 className="text-5xl font-bold mb-6 gradient-text">Euclid Mathematics Contest</h1>
             <div className="flex items-center justify-center gap-2 text-text-secondary">
               <span>📐</span>
-              <span>2024</span>
+              <span>2025</span>
             </div>
           </div>
           
@@ -35,7 +38,7 @@ export default function EuclidPage() {
               </p>
               
               <p className="text-lg mb-6">
-                In 2024, I participated in this challenging competition and received a Certificate of Participation, 
+                In 2025, I participated in this challenging competition and received a Certificate of Participation, 
                 demonstrating my commitment to mathematical excellence and problem-solving.
               </p>
 
