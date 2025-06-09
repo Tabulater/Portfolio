@@ -8,13 +8,13 @@ export default function EuclidPage() {
         <div className="max-w-4xl mx-auto">
           {/* Back button */}
           <Link 
-            href="/#achievements"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-8 transition-colors bg-card/50 px-4 py-2 rounded-lg hover:bg-card/70"
+            href="/"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-8 transition-colors bg-card/50 px-6 py-3 rounded-lg hover:bg-card/70 group"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:-translate-x-1 transition-transform">
               <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
-            Back to Achievements
+            <span className="font-semibold">Back to Aashrith's Portfolio</span>
           </Link>
 
           {/* Header */}
