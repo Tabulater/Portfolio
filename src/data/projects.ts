@@ -9,28 +9,28 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Autonomous Robot Navigation System",
-    description: "Developed a sophisticated autonomous navigation system using ROS (Robot Operating System) and computer vision. Implemented SLAM algorithms for real-time mapping and path planning, achieving 95% accuracy in obstacle avoidance.",
-    technologies: ["ROS", "Python", "OpenCV", "C++", "SLAM", "Computer Vision"],
+    title: "Portfolio Website",
+    description: "Developed a modern, responsive portfolio website using Next.js and Tailwind CSS. Implemented smooth animations, glass-morphism effects, and a clean, professional design to showcase my projects and skills.",
+    technologies: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Framer Motion"],
     featured: true,
-    link: "#",
-    github: "https://github.com/yourusername/robot-navigation"
+    link: "https://aashrith-raj.vercel.app",
+    github: "https://github.com/Tabulater/Portfolio"
   },
   {
-    title: "Smart Home Automation Hub",
-    description: "Engineered a centralized home automation system using Arduino and Raspberry Pi. Integrated various sensors and actuators for environmental monitoring and control, with a custom web interface for remote access.",
+    title: "Smart Home Automation",
+    description: "Built a comprehensive home automation system using Arduino and Raspberry Pi. Integrated various sensors for environmental monitoring and implemented a custom web interface for remote control.",
     technologies: ["Arduino", "Raspberry Pi", "Python", "IoT", "Web Development"],
     featured: true,
     link: "#",
-    github: "https://github.com/yourusername/smart-home"
+    github: "https://github.com/Tabulater/smart-home"
   },
   {
     title: "3D Printer Controller",
-    description: "Designed and implemented a custom 3D printer controller using STM32 microcontroller. Developed firmware for precise motor control and temperature regulation, achieving 0.1mm printing accuracy.",
+    description: "Designed and implemented a custom 3D printer controller using STM32 microcontroller. Developed firmware for precise motor control and temperature regulation, achieving high printing accuracy.",
     technologies: ["STM32", "C", "Embedded Systems", "PID Control"],
     featured: false,
     link: "#",
-    github: "https://github.com/yourusername/3d-printer"
+    github: "https://github.com/Tabulater/3d-printer"
   },
   {
     title: "Quadcopter Flight Controller",
@@ -38,15 +38,15 @@ export const projects: Project[] = [
     technologies: ["Arduino", "C++", "PID Control", "Embedded Systems"],
     featured: false,
     link: "#",
-    github: "https://github.com/yourusername/quadcopter"
+    github: "https://github.com/Tabulater/quadcopter"
   },
   {
-    title: "Automated Plant Monitoring System",
+    title: "Plant Monitoring System",
     description: "Created an IoT-based plant monitoring system with automated watering capabilities. Integrated soil moisture sensors and developed a machine learning model for optimal watering schedules.",
     technologies: ["IoT", "Python", "Machine Learning", "Arduino"],
     featured: false,
     link: "#",
-    github: "https://github.com/yourusername/plant-monitor"
+    github: "https://github.com/Tabulater/plant-monitor"
   },
   {
     title: "CNC Machine Controller",
@@ -54,6 +54,6 @@ export const projects: Project[] = [
     technologies: ["GRBL", "C++", "Embedded Systems", "G-code"],
     featured: false,
     link: "#",
-    github: "https://github.com/yourusername/cnc-controller"
+    github: "https://github.com/Tabulater/cnc-controller"
   }
 ]; 
