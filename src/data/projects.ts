@@ -16,7 +16,7 @@ export const projects: Project[] = [
     technologies: ["Arduino", "C++", "3D Printing", "Electronics"],
     featured: true,
     link: "#",
-    github: "https://github.com/yourusername/thermal-glove",
+    github: "https://github.com/Tabulater/thermal-glove",
     image: "/images/thermal-glove.jpg"
   },
   {
@@ -25,7 +25,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Raspberry Pi", "IoT", "MQTT"],
     featured: true,
     link: "#",
-    github: "https://github.com/yourusername/smart-home",
+    github: "https://github.com/Tabulater/smart-home",
     live: "https://smart-home-demo.com",
     image: "/images/smart-home.jpg"
   },
