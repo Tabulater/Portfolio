@@ -272,9 +272,6 @@ export default function Home() {
                 GitHub
               </a>
             </div>
-            <p className="text-sm text-gray-400">
-              Based in {contactInfo.location}
-            </p>
           </div>
         </div>
       </section>
