@@ -22,21 +22,22 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     speedY: number;
     opacity: number;
     isName: boolean;
+    color: string;
   }>>([]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
-    const phrase = "Engineering the Future";
+    const phrase = "Welcome";
 
     if (displayText.length < phrase.length) {
       timeout = setTimeout(() => {
         setDisplayText(phrase.substring(0, displayText.length + 1));
-      }, 50);
+      }, 100);
     } else {
       setShowParticles(true);
       timeout = setTimeout(() => {
         onComplete();
-      }, 1500);
+      }, 2000);
     }
 
     return () => clearTimeout(timeout);
@@ -56,43 +57,70 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
     const createParticles = () => {
       const particles = [];
-      const particleCount = 200;
+      const particleCount = 300;
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
       // Create particles for the name
       const name = "Aashrith Raj";
-      const fontSize = 60;
-      ctx.font = `${fontSize}px Arial`;
+      const fontSize = 80;
+      ctx.font = `bold ${fontSize}px Arial`;
       const textWidth = ctx.measureText(name).width;
       const textHeight = fontSize;
 
-      for (let i = 0; i < particleCount; i++) {
-        const isName = i < particleCount * 0.7; // 70% of particles form the name
-        let targetX, targetY;
+      // Create a temporary canvas to get pixel data
+      const tempCanvas = document.createElement('canvas');
+      const tempCtx = tempCanvas.getContext('2d');
+      if (!tempCtx) return;
 
-        if (isName) {
-          // Position particles to form the name
-          const x = centerX - textWidth / 2 + Math.random() * textWidth;
-          const y = centerY - textHeight / 2 + Math.random() * textHeight;
-          targetX = x;
-          targetY = y;
-        } else {
-          // Random positions for background particles
-          targetX = Math.random() * canvas.width;
-          targetY = Math.random() * canvas.height;
+      tempCanvas.width = textWidth;
+      tempCanvas.height = textHeight;
+      tempCtx.font = `bold ${fontSize}px Arial`;
+      tempCtx.fillStyle = 'white';
+      tempCtx.textAlign = 'center';
+      tempCtx.textBaseline = 'middle';
+      tempCtx.fillText(name, textWidth / 2, textHeight / 2);
+
+      const imageData = tempCtx.getImageData(0, 0, textWidth, textHeight);
+      const pixels = imageData.data;
+
+      // Create particles for the name
+      for (let y = 0; y < textHeight; y += 4) {
+        for (let x = 0; x < textWidth; x += 4) {
+          const index = (y * textWidth + x) * 4;
+          if (pixels[index + 3] > 128) { // If pixel is not transparent
+            const targetX = centerX - textWidth / 2 + x;
+            const targetY = centerY - textHeight / 2 + y;
+            
+            particles.push({
+              x: Math.random() * canvas.width,
+              y: Math.random() * canvas.height,
+              targetX,
+              targetY,
+              size: Math.random() * 2 + 2,
+              speedX: 0,
+              speedY: 0,
+              opacity: 1,
+              isName: true,
+              color: `hsl(${Math.random() * 60 + 200}, 100%, 70%)` // Blue to purple gradient
+            });
+          }
         }
+      }
 
+      // Add background particles
+      for (let i = 0; i < particleCount * 0.3; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          targetX,
-          targetY,
-          size: isName ? Math.random() * 2 + 1 : Math.random() * 3 + 1,
+          targetX: Math.random() * canvas.width,
+          targetY: Math.random() * canvas.height,
+          size: Math.random() * 2 + 1,
           speedX: 0,
           speedY: 0,
-          opacity: isName ? 1 : Math.random() * 0.5 + 0.2,
-          isName
+          opacity: Math.random() * 0.3 + 0.1,
+          isName: false,
+          color: 'rgba(var(--primary), 0.3)'
         });
       }
 
@@ -111,8 +139,9 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance > 1) {
-          particle.speedX = dx * 0.1;
-          particle.speedY = dy * 0.1;
+          const speed = particle.isName ? 0.15 : 0.05;
+          particle.speedX = dx * speed;
+          particle.speedY = dy * speed;
         } else {
           particle.speedX *= 0.95;
           particle.speedY *= 0.95;
@@ -123,7 +152,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(var(--primary), ${particle.opacity})`;
+        ctx.fillStyle = particle.color;
         ctx.fill();
       });
 
@@ -158,14 +187,14 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         className="text-center relative z-10"
       >
         <motion.h1 
-          className="text-5xl md:text-7xl font-bold mb-4 gradient-text"
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 0.5, repeat: Infinity }}
+          className="text-4xl md:text-6xl font-bold mb-4 text-white/80"
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
         >
           {displayText}
           <motion.span
             animate={{ opacity: [1, 0] }}
-            transition={{ duration: 0.3, repeat: Infinity }}
+            transition={{ duration: 0.5, repeat: Infinity }}
             className="inline-block ml-1"
           >
             |
