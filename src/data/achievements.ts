@@ -5,19 +5,15 @@ export interface Achievement {
 
 export const achievements: Achievement[] = [
   {
-    title: "First Place in Robotics Competition",
-    description: "Led a team to victory in a regional robotics competition, designing and implementing an autonomous navigation system using ROS and computer vision."
+    title: "Blue Ocean Competition Finalist",
+    description: "Achieved top 350 placement in the Blue Ocean Competition for the Gaia Cure pitch, demonstrating innovative thinking in healthcare solutions."
   },
   {
-    title: "Engineering Excellence Award",
-    description: "Recognized for outstanding contributions to engineering projects, particularly in the development of innovative mechatronics solutions."
+    title: "OCCAS Creative Writing Contest Winner",
+    description: "Won the fiction category at Western University's OCCAS Creative Writing Contest for 'Glassblower's Ephemera', showcasing creative excellence."
   },
   {
-    title: "Research Publication",
-    description: "Co-authored a research paper on advanced control systems for autonomous vehicles, published in a peer-reviewed engineering journal."
-  },
-  {
-    title: "Hackathon Winner",
-    description: "Won first place in a 48-hour hackathon, developing a smart home automation system that integrated IoT devices with machine learning algorithms."
+    title: "Principal's Honour Roll",
+    description: "Recognized twice for academic excellence by being named to the Principal's Honour Roll, demonstrating consistent high achievement."
   }
 ]; 
