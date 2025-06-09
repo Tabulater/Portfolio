@@ -1,18 +1,16 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaCode, FaRobot, FaMicrochip } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 interface IntroAnimationProps {
   onComplete: () => void;
 }
 
 const phrases = [
-  "Building the future of robotics...",
-  "Crafting innovative solutions...",
-  "Engineering tomorrow's technology...",
-  "Welcome to my portfolio"
+  "Engineering the future...",
+  "Building robots...",
+  "Let's create!"
 ];
 
 const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
@@ -38,7 +36,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     if (!isDeleting && displayText === currentPhraseText) {
       timeout = setTimeout(() => {
         setIsDeleting(true);
-      }, 2000);
+      }, 800);
     } else if (isDeleting && displayText === '') {
       setIsDeleting(false);
       setCurrentPhrase((prev) => (prev + 1) % phrases.length);
@@ -46,7 +44,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       const delta = isDeleting ? -1 : 1;
       timeout = setTimeout(() => {
         setDisplayText(currentPhraseText.substring(0, displayText.length + delta));
-      }, isDeleting ? 50 : 100);
+      }, isDeleting ? 30 : 50);
     }
 
     return () => clearTimeout(timeout);
@@ -57,7 +55,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       setShowParticles(true);
       const timeout = setTimeout(() => {
         onComplete();
-      }, 2000);
+      }, 1000);
       return () => clearTimeout(timeout);
     }
   }, [currentPhrase, displayText, onComplete]);
@@ -76,16 +74,16 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
     const createParticles = () => {
       const particles = [];
-      const particleCount = 50;
+      const particleCount = 100;
 
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 3 + 1,
-          speedX: (Math.random() - 0.5) * 2,
-          speedY: (Math.random() - 0.5) * 2,
-          opacity: Math.random() * 0.5 + 0.5
+          size: Math.random() * 4 + 1,
+          speedX: (Math.random() - 0.5) * 4,
+          speedY: (Math.random() - 0.5) * 4,
+          opacity: Math.random() * 0.7 + 0.3
         });
       }
 
@@ -134,7 +132,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       <canvas
         ref={canvasRef}
         className="absolute inset-0"
-        style={{ opacity: showParticles ? 1 : 0, transition: 'opacity 1s ease-in-out' }}
+        style={{ opacity: showParticles ? 1 : 0, transition: 'opacity 0.5s ease-in-out' }}
       />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -142,16 +140,20 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         exit={{ opacity: 0, y: -20 }}
         className="text-center relative z-10"
       >
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 gradient-text">
+        <motion.h1 
+          className="text-5xl md:text-7xl font-bold mb-4 gradient-text"
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 0.5, repeat: Infinity }}
+        >
           {displayText}
           <motion.span
             animate={{ opacity: [1, 0] }}
-            transition={{ duration: 0.5, repeat: Infinity }}
+            transition={{ duration: 0.3, repeat: Infinity }}
             className="inline-block ml-1"
           >
             |
           </motion.span>
-        </h1>
+        </motion.h1>
       </motion.div>
     </div>
   );
