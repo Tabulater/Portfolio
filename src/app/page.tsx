@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
+import Image from 'next/image';
 import Projects from '@/components/Projects';
 import { achievements } from '@/data/achievements';
 
@@ -19,7 +20,7 @@ export default function Home() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Aashrith
+              Aashrith Raj
             </motion.a>
             <div className="flex gap-6">
               <motion.a
@@ -124,31 +125,47 @@ export default function Home() {
             className="max-w-4xl mx-auto"
           >
             <div className="card p-8">
-              <h3 className="text-2xl font-bold text-[rgb(var(--primary))] mb-6">Technical Skills</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {[
-                  'Robotics',
-                  'Embedded Systems',
-                  'Control Systems',
-                  'CAD/CAM',
-                  'Python',
-                  'C++',
-                  'Arduino',
-                  'Raspberry Pi',
-                  'ROS',
-                  'Machine Learning',
-                  'Computer Vision',
-                  'IoT'
-                ].map((skill) => (
-                  <motion.div
-                    key={skill}
-                    className="tech-badge"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {skill}
-                  </motion.div>
-                ))}
+              <div className="grid md:grid-cols-2 gap-12 items-center mb-8">
+                <div className="relative w-72 h-72 mx-auto">
+                  <Image
+                    src="/Profile.png"
+                    alt="Profile"
+                    width={288}
+                    height={288}
+                    className="rounded-full border-4 border-white/10 shadow-xl"
+                    priority
+                    quality={100}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-[rgb(var(--primary))] mb-4">Technical Skills</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    {[
+                      'Robotics',
+                      'Embedded Systems',
+                      'Control Systems',
+                      'CAD/CAM',
+                      'Python',
+                      'C++',
+                      'Arduino',
+                      'Raspberry Pi',
+                      'ROS',
+                      'Machine Learning',
+                      'Computer Vision',
+                      'IoT'
+                    ].map((skill) => (
+                      <motion.div
+                        key={skill}
+                        className="tech-badge"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        {skill}
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -215,7 +232,7 @@ export default function Home() {
             </p>
             <div className="flex justify-center gap-6">
               <motion.a
-                href="https://github.com/yourusername"
+                href="https://github.com/Tabulater"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline"
@@ -226,7 +243,7 @@ export default function Home() {
                 GitHub
               </motion.a>
               <motion.a
-                href="https://linkedin.com/in/yourusername"
+                href="https://linkedin.com/in/aashrith-raj"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline"
@@ -237,7 +254,7 @@ export default function Home() {
                 LinkedIn
               </motion.a>
               <motion.a
-                href="https://leetcode.com/yourusername"
+                href="https://leetcode.com/Tabulater"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline"
@@ -248,7 +265,7 @@ export default function Home() {
                 LeetCode
               </motion.a>
               <motion.a
-                href="mailto:your.email@example.com"
+                href="mailto:napoleonbonaporte42@gmail.com"
                 className="btn-outline"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
