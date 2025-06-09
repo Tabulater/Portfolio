@@ -114,9 +114,7 @@ export default function Home() {
               <span className="gradient-text">About Me</span>
             </h2>
               <p className="text-text-secondary text-lg leading-relaxed">
-              I am a passionate mechatronics engineering student with a strong foundation in robotics, 
-              automation, and embedded systems. My journey in engineering has been driven by a desire 
-              to create innovative solutions that combine mechanical, electrical, and software components.
+                Hello, I'm Aashrith Raj Tatipamula, a passionate and innovative grade 11 student with a interest in engineering, technology, and solving real-world problems. My journey involves blending creativity with technical expertise, aiming to develop projects that make a meaningful impact. I am particularly fascinated by creating technology solutions, ranging from distributed computing systems to using Arduino. I strive to innovate and constantly learn.
               </p>
             </motion.div>
 
