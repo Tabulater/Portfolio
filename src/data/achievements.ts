@@ -29,7 +29,7 @@ export const achievements: Achievement[] = [
     link: "#"
   },
   {
-    title: "Western University Dean's List",
+    title: "Principal's Honour Roll",
     description: "Achieved academic excellence by maintaining a GPA above 3.7, placing in the top 10% of students.",
     date: "2024",
     icon: "🎓",
