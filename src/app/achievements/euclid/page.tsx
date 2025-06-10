@@ -9,6 +9,7 @@ export default function EuclidPage() {
           {/* Back button */}
           <Link 
             href="/"
+            onClick={() => sessionStorage.setItem('skipIntro', 'true')}
             className="inline-flex items-center gap-2 text-white hover:text-white/80 mb-8 transition-colors bg-card/50 px-6 py-3 rounded-lg hover:bg-card/70 group"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:-translate-x-1 transition-transform">
