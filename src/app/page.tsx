@@ -106,6 +106,16 @@ export default function Home() {
                 View Projects
               </motion.a>
               <motion.a
+                href="/Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                View Resume
+              </motion.a>
+              <motion.a
                 href="#contact"
                 className="btn-outline"
                 whileHover={{ scale: 1.05 }}
