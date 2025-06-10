@@ -69,7 +69,7 @@ export default function OccausPage() {
                   href="https://www.uwo.ca/writing/undergraduate/occasus_high_school_creative_writing_contest/recipients.html"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                  className="inline-flex items-center gap-2 text-white hover:text-white/80 transition-colors"
                 >
                   <span>View Official Contest Results</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
