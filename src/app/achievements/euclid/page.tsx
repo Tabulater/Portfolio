@@ -7,9 +7,10 @@ import { useRouter } from 'next/navigation';
 export default function EuclidPage() {
   const router = useRouter();
 
-  const handleBack = () => {
+  const handleBack = (e: React.MouseEvent) => {
+    e.preventDefault();
     sessionStorage.setItem('skipIntro', 'true');
-    router.push('/');
+    router.push('/', { scroll: false });
   };
 
   return (
@@ -17,7 +18,8 @@ export default function EuclidPage() {
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           {/* Back button */}
-          <button 
+          <Link 
+            href="/"
             onClick={handleBack}
             className="inline-flex items-center gap-2 text-white hover:text-white/80 mb-8 transition-colors bg-card/50 px-6 py-3 rounded-lg hover:bg-card/70 group"
           >
@@ -25,7 +27,7 @@ export default function EuclidPage() {
               <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
             <span className="font-semibold">Back to Aashrith's Portfolio</span>
-          </button>
+          </Link>
 
           {/* Header */}
           <div className="text-center mb-12">
