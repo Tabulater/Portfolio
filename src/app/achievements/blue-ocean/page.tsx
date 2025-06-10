@@ -63,13 +63,27 @@ export default function BlueOceanPage() {
               </div>
             </div>
 
-            {/* PDF Viewer */}
-            <div className="relative aspect-[3/4] rounded-xl overflow-hidden shadow-2xl bg-card/50">
-              <iframe
-                src="/blue-ocean-pitch.pdf"
-                className="w-full h-full"
-                title="Blue Ocean Competition Pitch"
-              />
+            {/* Video and PDF */}
+            <div className="space-y-8">
+              {/* Video */}
+              <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl bg-card/50">
+                <iframe
+                  src="https://www.youtube.com/embed/ZzE36T6hObM"
+                  title="Blue Ocean Competition"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              </div>
+
+              {/* PDF Viewer */}
+              <div className="relative aspect-[3/4] rounded-xl overflow-hidden shadow-2xl bg-card/50">
+                <iframe
+                  src="/Blue_Ocean.pdf"
+                  className="w-full h-full"
+                  title="Blue Ocean Competition Pitch"
+                />
+              </div>
             </div>
           </div>
         </div>
