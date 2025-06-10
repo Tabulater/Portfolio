@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -39,7 +38,7 @@ export default function OccausPage() {
           </div>
           
           {/* Content */}
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div className="max-w-2xl mx-auto">
             {/* Description */}
             <div className="prose prose-lg">
               <p className="text-lg mb-6">
@@ -80,17 +79,6 @@ export default function OccausPage() {
                   </svg>
                 </Link>
               </div>
-            </div>
-
-            {/* Video */}
-            <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl bg-card/50">
-              <iframe
-                src="https://www.youtube.com/embed/ZzE36T6hObM"
-                title="Occaus Creative Writing Contest"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
             </div>
           </div>
         </div>
