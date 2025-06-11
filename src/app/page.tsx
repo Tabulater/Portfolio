@@ -10,7 +10,6 @@ import IntroAnimation from '@/components/IntroAnimation';
 import { contactInfo } from '@/data/contact';
 import { MdEmail } from 'react-icons/md';
 import { achievements } from '@/data/achievements';
-import { FaYoutube } from 'react-icons/fa';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
@@ -290,15 +289,6 @@ export default function Home() {
               >
                 <FaGithub className="text-xl" />
                 GitHub
-              </a>
-              <a
-                href="https://www.youtube.com/@ActofKnowledge"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline flex items-center justify-center gap-2"
-              >
-                <FaYoutube className="text-xl text-red-500" />
-                YouTube
               </a>
             </div>
           </div>
