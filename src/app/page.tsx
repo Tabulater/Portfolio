@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope, FaWikipediaW } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaWikipediaW, FaYoutube } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 import Image from 'next/image';
 import Projects from '@/components/Projects';
@@ -289,6 +289,24 @@ export default function Home() {
               >
                 <FaGithub className="text-xl" />
                 GitHub
+              </a>
+              <a
+                href="https://www.youtube.com/@ActofKnowledge"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline flex items-center justify-center gap-2"
+              >
+                <FaYoutube className="text-xl text-red-500" />
+                YouTube
+              </a>
+              <a
+                href="https://www.appropedia.org/User:Tabulator"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline flex items-center justify-center gap-2"
+              >
+                <FaWikipediaW className="text-xl" />
+                Appropedia
               </a>
             </div>
           </div>
