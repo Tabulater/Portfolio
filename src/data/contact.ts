@@ -4,7 +4,7 @@ import { FaLinkedin, FaGithub } from 'react-icons/fa';
 export interface ContactItem {
   label: string;
   link: string;
-  iconType: 'email' | 'linkedin' | 'github' | 'location';
+  iconType: 'email' | 'linkedin' | 'github' | 'location' | 'appropedia';
 }
 
 export const contactInfo: ContactItem[] = [
@@ -27,5 +27,10 @@ export const contactInfo: ContactItem[] = [
     label: "Location",
     link: "#",
     iconType: 'location'
+  },
+  {
+    label: "Appropedia",
+    link: "https://www.appropedia.org/User:Tabulator",
+    iconType: 'appropedia'
   }
 ]; 

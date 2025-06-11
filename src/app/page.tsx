@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaWikipediaW } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 import Image from 'next/image';
 import Projects from '@/components/Projects';
@@ -290,7 +290,8 @@ export default function Home() {
                       email: MdEmail,
                       linkedin: FaLinkedin,
                       github: FaGithub,
-                      location: MdLocationOn
+                      location: MdLocationOn,
+                      appropedia: FaWikipediaW
                     }[item.iconType];
 
                     return (
