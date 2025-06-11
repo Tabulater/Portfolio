@@ -260,11 +260,11 @@ export default function Home() {
       <section id="contact" className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Get in Touch</h2>
-          <div className="max-w-2xl mx-auto text-center">
+          <div className="max-w-4xl mx-auto text-center">
             <p className="text-lg mb-8">
               I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
             </p>
-            <div className="flex flex-col md:flex-row justify-center gap-6 mb-8">
+            <div className="flex flex-col md:flex-row justify-center gap-8 mb-8">
               <a
                 href={`mailto:${contactInfo[0].link.replace('mailto:', '')}`}
                 className="btn-primary flex items-center justify-center gap-2"
