@@ -8,7 +8,7 @@ import Projects from '@/components/Projects';
 import { useState, useEffect } from 'react';
 import IntroAnimation from '@/components/IntroAnimation';
 import { contactInfo } from '@/data/contact';
-import { MdEmail } from 'react-icons/md';
+import { MdEmail, MdLocationOn } from 'react-icons/md';
 import { achievements } from '@/data/achievements';
 
 export default function Home() {
@@ -258,38 +258,116 @@ export default function Home() {
 
       {/* Contact Section */}
       <section id="contact" className="py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Get in Touch</h2>
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-lg mb-8">
-              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center mb-16"
+          >
+            <h2 className="heading-2 mb-6">
+              <span className="gradient-text">Contact & Social</span>
+            </h2>
+            <p className="text-text-secondary text-lg leading-relaxed">
+              Feel free to reach out through any of these platforms. I'm always open to discussing new projects, 
+              creative ideas, or opportunities to be part of your visions.
             </p>
-            <div className="flex flex-col md:flex-row justify-center gap-6 mb-8">
-              <a
-                href={`mailto:${contactInfo.email}`}
-                className="btn-primary flex items-center justify-center gap-2"
+          </motion.div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Contact Info */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="card p-8"
               >
-                <MdEmail className="text-xl" />
-                Email Me
-              </a>
-              <a
-                href={contactInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline flex items-center justify-center gap-2"
+                <h3 className="text-2xl font-bold text-[rgb(var(--primary))] mb-6">Get in Touch</h3>
+                <div className="space-y-4">
+                  {contactInfo.map((item) => {
+                    const Icon = {
+                      email: MdEmail,
+                      linkedin: FaLinkedin,
+                      github: FaGithub,
+                      location: MdLocationOn
+                    }[item.iconType];
+
+                    return (
+                      <motion.a
+                        key={item.label}
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-4 text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <Icon className="text-2xl" />
+                        <span>{item.label}</span>
+                      </motion.a>
+                    );
+                  })}
+                </div>
+              </motion.div>
+
+              {/* Social Links */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="card p-8"
               >
-                <FaLinkedin className="text-xl" />
-                LinkedIn
-              </a>
-              <a
-                href={contactInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline flex items-center justify-center gap-2"
-              >
-                <FaGithub className="text-xl" />
-                GitHub
-              </a>
+                <h3 className="text-2xl font-bold text-[rgb(var(--primary))] mb-6">Connect With Me</h3>
+                <div className="space-y-4">
+                  <motion.a
+                    href="https://github.com/Tabulater"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <FaGithub className="text-2xl" />
+                    <span>GitHub</span>
+                  </motion.a>
+                  <motion.a
+                    href="https://www.linkedin.com/in/aashrith-raj-tatipamula-2b2b2b2b2/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <FaLinkedin className="text-2xl" />
+                    <span>LinkedIn</span>
+                  </motion.a>
+                  <motion.a
+                    href="https://leetcode.com/Tabulater/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <SiLeetcode className="text-2xl" />
+                    <span>LeetCode</span>
+                  </motion.a>
+                  <motion.a
+                    href="https://www.youtube.com/@ActofKnowledge"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <svg className="text-2xl" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    <span>YouTube</span>
+                  </motion.a>
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>
