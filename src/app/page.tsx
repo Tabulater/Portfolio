@@ -74,6 +74,14 @@ export default function Home() {
               >
                 Contact
               </motion.a>
+              <motion.a
+                href="/donate"
+                className="text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Support
+              </motion.a>
             </div>
           </div>
         </div>
