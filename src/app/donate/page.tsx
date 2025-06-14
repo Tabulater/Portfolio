@@ -14,7 +14,7 @@ const donationAmounts = [
   { amount: 50, label: 'Make a Difference' },
 ];
 
-function CheckoutForm({ amount }: { amount: number }) {
+function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState<string>();
@@ -51,9 +51,8 @@ function CheckoutForm({ amount }: { amount: number }) {
       {errorMessage && (
         <div className="text-red-500 text-sm">{errorMessage}</div>
       )}
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+      <button
+        type="submit"
         disabled={!stripe || isProcessing}
         className={`w-full py-4 px-6 rounded-xl text-white font-medium text-lg ${
           !stripe || isProcessing
@@ -61,8 +60,8 @@ function CheckoutForm({ amount }: { amount: number }) {
             : 'bg-blue-600 hover:bg-blue-700'
         }`}
       >
-        {isProcessing ? 'Processing...' : `Pay $${amount}`}
-      </motion.button>
+        {isProcessing ? 'Processing...' : 'Pay Now'}
+      </button>
     </form>
   );
 }
@@ -85,6 +84,10 @@ export default function DonatePage() {
       });
 
       const data = await response.json();
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
       setClientSecret(data.clientSecret);
     } catch (error) {
       console.error('Error:', error);
@@ -95,7 +98,7 @@ export default function DonatePage() {
   };
 
   const appearance = {
-    theme: 'stripe' as const,
+    theme: 'stripe',
     variables: {
       colorPrimary: '#3b82f6',
       colorBackground: '#ffffff',
@@ -134,10 +137,7 @@ export default function DonatePage() {
                     key={amount}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => {
-                      setSelectedAmount(amount);
-                      handleDonation(amount);
-                    }}
+                    onClick={() => setSelectedAmount(amount)}
                     className={`p-6 rounded-xl border-2 text-center transition-all ${
                       selectedAmount === amount
                         ? 'border-blue-500 bg-blue-50'
@@ -175,20 +175,20 @@ export default function DonatePage() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => handleDonation(Number(customAmount))}
-                disabled={isLoading || !customAmount}
+                onClick={() => handleDonation(selectedAmount || Number(customAmount))}
+                disabled={isLoading || (!selectedAmount && !customAmount)}
                 className={`w-full py-4 px-6 rounded-xl text-white font-medium text-lg ${
-                  isLoading || !customAmount
+                  isLoading || (!selectedAmount && !customAmount)
                     ? 'bg-gray-400 cursor-not-allowed'
                     : 'bg-blue-600 hover:bg-blue-700'
                 }`}
               >
-                {isLoading ? 'Processing...' : 'Support Now'}
+                {isLoading ? 'Processing...' : 'Continue to Payment'}
               </motion.button>
             </>
           ) : (
             <Elements stripe={stripePromise} options={{ clientSecret, appearance }}>
-              <CheckoutForm amount={selectedAmount || Number(customAmount)} />
+              <CheckoutForm />
             </Elements>
           )}
 

@@ -35,7 +35,7 @@ export default function SuccessPage() {
               <h1 className="text-4xl font-bold text-gray-900 mb-4">
                 Processing Your Payment
               </h1>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-gray-600 mb-8">
                 Please wait while we confirm your payment...
               </p>
             </>
@@ -47,11 +47,11 @@ export default function SuccessPage() {
                 Thank You for Your Support!
               </h1>
               <p className="text-xl text-gray-600 mb-8">
-                Your contribution will help me continue learning and creating amazing projects.
+                Your payment was successful. Your support means a lot to me and helps me continue my journey in technology and innovation.
               </p>
               <Link
                 href="/"
-                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Return to Home
               </Link>
@@ -64,11 +64,11 @@ export default function SuccessPage() {
                 Payment Failed
               </h1>
               <p className="text-xl text-gray-600 mb-8">
-                We couldn't process your payment. Please try again.
+                We couldn't process your payment. Please try again or contact support if the problem persists.
               </p>
               <Link
                 href="/donate"
-                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Try Again
               </Link>
