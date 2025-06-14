@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { motion } from 'framer-motion';
+import { Elements } from '@stripe/react-stripe-js';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
@@ -14,95 +14,54 @@ const donationAmounts = [
   { amount: 50, label: 'Make a Difference' },
 ];
 
-function CheckoutForm({ amount }: { amount: number }) {
-  const stripe = useStripe();
-  const elements = useElements();
-  const [error, setError] = useState<string | null>(null);
-  const [processing, setProcessing] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!stripe || !elements) return;
-
-    setProcessing(true);
-    setError(null);
-
-    const { error: submitError } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${window.location.origin}/donate/success`,
-      },
-    });
-
-    if (submitError) {
-      setError(submitError.message || 'An error occurred');
-      setProcessing(false);
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <PaymentElement />
-      {error && (
-        <div className="text-red-500 text-sm mt-2">{error}</div>
-      )}
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        disabled={!stripe || processing}
-        className={`w-full py-4 px-6 rounded-xl text-white font-medium text-lg ${
-          !stripe || processing
-            ? 'bg-gray-400 cursor-not-allowed'
-            : 'bg-blue-600 hover:bg-blue-700'
-        }`}
-      >
-        {processing ? 'Processing...' : `Pay $${amount}`}
-      </motion.button>
-    </form>
-  );
-}
-
-export default function DonatePage() {
+function DonationForm() {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
   const [customAmount, setCustomAmount] = useState('');
-  const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const amount = selectedAmount || Number(customAmount);
-    if (amount) {
+  const handleDonation = async (amount: number) => {
+    try {
       setIsLoading(true);
-      fetch('/api/create-payment-intent', {
+      setError(null);
+
+      // Create a payment intent
+      const response = await fetch('/api/create-payment-intent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ amount }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setClientSecret(data.clientSecret);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }
-  }, [selectedAmount, customAmount]);
+      });
 
-  const appearance = {
-    theme: 'stripe',
-    variables: {
-      colorPrimary: '#3b82f6',
-      colorBackground: '#ffffff',
-      colorText: '#1f2937',
-      colorDanger: '#ef4444',
-      fontFamily: 'system-ui, sans-serif',
-      spacingUnit: '4px',
-      borderRadius: '8px',
-    },
+      if (!response.ok) {
+        throw new Error('Failed to create payment intent');
+      }
+
+      const { clientSecret } = await response.json();
+
+      // Redirect to Stripe Checkout
+      const stripe = await stripePromise;
+      if (!stripe) throw new Error('Stripe failed to load');
+
+      const { error: stripeError } = await stripe.confirmPayment({
+        elements: {
+          clientSecret,
+        },
+        confirmParams: {
+          return_url: `${window.location.origin}/donate/success`,
+        },
+      });
+
+      if (stripeError) {
+        throw stripeError;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setError('Something went wrong. Please try again later.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -165,17 +124,25 @@ export default function DonatePage() {
             </div>
           </div>
 
-          {clientSecret && (
-            <Elements
-              stripe={stripePromise}
-              options={{
-                clientSecret,
-                appearance,
-              }}
-            >
-              <CheckoutForm amount={selectedAmount || Number(customAmount)} />
-            </Elements>
+          {error && (
+            <div className="mb-4 p-4 bg-red-50 text-red-700 rounded-lg">
+              {error}
+            </div>
           )}
+
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => handleDonation(selectedAmount || Number(customAmount))}
+            disabled={isLoading || (!selectedAmount && !customAmount)}
+            className={`w-full py-4 px-6 rounded-xl text-white font-medium text-lg ${
+              isLoading || (!selectedAmount && !customAmount)
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-blue-600 hover:bg-blue-700'
+            }`}
+          >
+            {isLoading ? 'Processing...' : 'Support Now'}
+          </motion.button>
 
           <p className="mt-4 text-center text-sm text-gray-500">
             Your support helps me continue learning and creating. Thank you for being part of my journey!
@@ -183,5 +150,13 @@ export default function DonatePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function DonatePage() {
+  return (
+    <Elements stripe={stripePromise}>
+      <DonationForm />
+    </Elements>
   );
 } 
