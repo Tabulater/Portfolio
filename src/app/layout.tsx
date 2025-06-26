@@ -1,10 +1,14 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+})
 
 export const metadata: Metadata = {
   title: 'Aashrith Raj Tatipamula',
@@ -21,8 +25,6 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/manifest.json',
-  themeColor: '#000000',
-  viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
   keywords: [
     'Aashrith Raj Tatipamula',
@@ -61,6 +63,12 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#000000',
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -68,6 +76,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Preload critical resources */}
+        <link rel="preload" href="/Profile.png" as="image" />
+        <link rel="preload" href="/Favicon.png" as="image" />
+        <link rel="dns-prefetch" href="//prod.spline.design" />
+        <link rel="dns-prefetch" href="//21st.dev" />
+        <link rel="preconnect" href="https://prod.spline.design" />
+        <link rel="preconnect" href="https://21st.dev" />
+      </head>
       <body className={`${inter.className} bg-primary text-text-primary`}>
         <main className="min-h-screen">
           {children}

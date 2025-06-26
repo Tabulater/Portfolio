@@ -5,7 +5,7 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaWikipediaW, FaYoutube } from 'react
 import { SiLeetcode } from 'react-icons/si';
 import Image from 'next/image';
 import Projects from '@/components/Projects';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import IntroAnimation from '@/components/IntroAnimation';
 import { contactInfo } from '@/data/contact';
 import { MdEmail, MdLocationOn } from 'react-icons/md';
@@ -53,8 +53,32 @@ export default function Home() {
     setSplineLoading(false);
   }, []);
 
+  const handleIntroComplete = useCallback(() => {
+    setShowIntro(false);
+  }, []);
+
+  // Memoize static content
+  const navigationLinks = useMemo(() => [
+    { href: '#about', text: 'About' },
+    { href: '#projects', text: 'Projects' },
+    { href: '#achievements', text: 'Achievements' },
+    { href: '#contact', text: 'Contact' }
+  ], []);
+
+  const heroButtons = useMemo(() => [
+    { href: '#projects', text: 'View Projects', className: 'btn-primary' },
+    { href: '/Resume.pdf', text: 'View Resume', className: 'btn-outline', external: true },
+    { href: '#contact', text: 'Contact Me', className: 'btn-outline' }
+  ], []);
+
+  const skills = useMemo(() => [
+    'Robotics', 'Embedded Systems', 'Control Systems', 'CAD/CAM',
+    'Python', 'C++', 'Arduino', 'Raspberry Pi', 'ROS',
+    'Machine Learning', 'Computer Vision', 'IoT'
+  ], []);
+
   if (showIntro) {
-    return <IntroAnimation onComplete={() => setShowIntro(false)} />;
+    return <IntroAnimation onComplete={handleIntroComplete} />;
   }
 
   return (
@@ -72,38 +96,17 @@ export default function Home() {
               Aashrith Raj
             </motion.a>
             <div className="flex gap-6">
-              <motion.a
-                href="#about"
-                className="text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                About
-              </motion.a>
-              <motion.a
-                href="#projects"
-                className="text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Projects
-              </motion.a>
-              <motion.a
-                href="#achievements"
-                className="text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Achievements
-              </motion.a>
-              <motion.a
-                href="#contact"
-                className="text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Contact
-              </motion.a>
+              {navigationLinks.map((link) => (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  className="text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {link.text}
+                </motion.a>
+              ))}
             </div>
           </div>
         </div>
@@ -147,35 +150,19 @@ export default function Home() {
               Building innovative solutions that bridge the gap between hardware and software.
             </p>
             <div className="flex justify-center gap-6" style={{ pointerEvents: 'none' }}>
-              <motion.a
-                href="#projects"
-                className="btn-primary"
-                style={{ pointerEvents: 'auto' }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View Projects
-              </motion.a>
-              <motion.a
-                href="/Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline"
-                style={{ pointerEvents: 'auto' }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View Resume
-              </motion.a>
-              <motion.a
-                href="#contact"
-                className="btn-outline"
-                style={{ pointerEvents: 'auto' }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Contact Me
-              </motion.a>
+              {heroButtons.map((button) => (
+                <motion.a
+                  key={button.href}
+                  href={button.href}
+                  className={button.className}
+                  style={{ pointerEvents: 'auto' }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  {...(button.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                  {button.text}
+                </motion.a>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -221,20 +208,7 @@ export default function Home() {
                 <div>
                   <h3 className="text-2xl font-bold text-[rgb(var(--primary))] mb-4">Technical Skills</h3>
                   <div className="grid grid-cols-2 gap-4">
-                    {[
-                      'Robotics',
-                      'Embedded Systems',
-                      'Control Systems',
-                      'CAD/CAM',
-                      'Python',
-                      'C++',
-                      'Arduino',
-                      'Raspberry Pi',
-                      'ROS',
-                      'Machine Learning',
-                      'Computer Vision',
-                      'IoT'
-                    ].map((skill) => (
+                    {skills.map((skill) => (
                       <motion.div
                         key={skill}
                         className="tech-badge"
@@ -296,9 +270,11 @@ export default function Home() {
                     {achievement.link && (
                       <a
                         href={achievement.link}
-                        className="text-[rgb(var(--primary))] hover:text-[rgb(var(--primary))]/80 transition-colors flex items-center gap-2"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[rgb(var(--primary))] hover:underline"
                       >
-                        Learn More →
+                        View Details →
                       </a>
                     )}
                   </div>
@@ -310,58 +286,90 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Get in Touch</h2>
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-lg mb-8">
-              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+      <section id="contact" className="section-padding">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center mb-16"
+          >
+            <h2 className="heading-2 mb-6">
+              <span className="gradient-text">Get In Touch</span>
+            </h2>
+            <p className="text-text-secondary text-lg leading-relaxed">
+              I'm always open to discussing new opportunities, innovative projects, 
+              and exciting collaborations. Let's connect!
             </p>
-            <div className="flex flex-col md:flex-row justify-center gap-8 mb-8">
-              <a
-                href={`mailto:${contactInfo[0].link.replace('mailto:', '')}`}
-                className="btn-primary flex items-center justify-center gap-2"
-              >
-                <MdEmail className="text-xl" />
-                Email Me
-              </a>
-              <a
-                href={contactInfo[1].link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline flex items-center justify-center gap-2"
-              >
-                <FaLinkedin className="text-xl" />
-                LinkedIn
-              </a>
-              <a
-                href={contactInfo[2].link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline flex items-center justify-center gap-2"
-              >
-                <FaGithub className="text-xl" />
-                GitHub
-              </a>
-              <a
-                href="https://www.youtube.com/@ActofKnowledge"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline flex items-center justify-center gap-2"
-              >
-                <FaYoutube className="text-xl text-red-500" />
-                YouTube
-              </a>
-              <a
-                href="https://www.appropedia.org/User:Tabulator"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline flex items-center justify-center gap-2"
-              >
-                <FaWikipediaW className="text-xl" />
-                Appropedia
-              </a>
-            </div>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            {/* Contact Info */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="card p-8">
+                <h3 className="text-2xl font-bold text-[rgb(var(--primary))] mb-6">Contact Information</h3>
+                <div className="space-y-4">
+                  {contactInfo.filter(item => item.iconType === 'email' || item.iconType === 'location').map((item) => (
+                    <div key={item.label} className="flex items-center gap-3">
+                      {item.iconType === 'email' ? (
+                        <MdEmail className="text-[rgb(var(--primary))] text-xl" />
+                      ) : (
+                        <MdLocationOn className="text-[rgb(var(--primary))] text-xl" />
+                      )}
+                      <a 
+                        href={item.link} 
+                        className="text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
+                        {...(item.iconType === 'email' ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+                      >
+                        {item.label === 'Location' ? 'Toronto, Canada' : item.link.replace('mailto:', '')}
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Social Links */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="card p-8">
+                <h3 className="text-2xl font-bold text-[rgb(var(--primary))] mb-6">Connect With Me</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {contactInfo.filter(item => item.iconType !== 'email' && item.iconType !== 'location').map((item) => {
+                    const getIcon = () => {
+                      switch (item.iconType) {
+                        case 'linkedin': return <FaLinkedin />;
+                        case 'github': return <FaGithub />;
+                        case 'appropedia': return <FaWikipediaW />;
+                        default: return null;
+                      }
+                    };
+                    
+                    return (
+                      <motion.a
+                        key={item.label}
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-3 rounded-lg bg-[rgb(var(--primary))]/10 hover:bg-[rgb(var(--primary))]/20 transition-colors"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <span className="text-xl">{getIcon()}</span>
+                        <span className="text-text-secondary">{item.label}</span>
+                      </motion.a>
+                    );
+                  })}
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

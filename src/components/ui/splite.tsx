@@ -13,11 +13,18 @@ interface SplineSceneProps {
 export function SplineScene({ scene, className, onError, onLoad }: SplineSceneProps) {
   const splineRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const lastEmitTime = useRef(0);
+  const lastPosition = useRef({ x: 0, y: 0 });
 
-  // Memoize the scene URL to prevent unnecessary re-renders
-  const memoizedScene = useMemo(() => scene, [scene]);
-
+  // Throttle mouse events for better performance
   const handleMouseMove = useCallback((event: MouseEvent) => {
+    const now = Date.now();
+    const throttleMs = 16; // ~60fps
+    
+    if (now - lastEmitTime.current < throttleMs) {
+      return;
+    }
+    
     if (splineRef.current) {
       // Use global window coordinates for consistent tracking
       const x = event.clientX / window.innerWidth;
@@ -26,6 +33,16 @@ export function SplineScene({ scene, className, onError, onLoad }: SplineScenePr
       // Ensure coordinates are within bounds
       const clampedX = Math.max(0, Math.min(1, x));
       const clampedY = Math.max(0, Math.min(1, y));
+      
+      // Only emit if position changed significantly
+      const threshold = 0.01;
+      if (Math.abs(clampedX - lastPosition.current.x) < threshold && 
+          Math.abs(clampedY - lastPosition.current.y) < threshold) {
+        return;
+      }
+      
+      lastPosition.current = { x: clampedX, y: clampedY };
+      lastEmitTime.current = now;
       
       // Enhanced head movement for different screen regions
       let headRotationX, headRotationY;
@@ -118,8 +135,18 @@ export function SplineScene({ scene, className, onError, onLoad }: SplineScenePr
     }
   }, [onLoad]);
 
+  // Memoize the container styles
+  const containerStyle = useMemo(() => ({
+    pointerEvents: 'auto' as const,
+    zIndex: 1
+  }), []);
+
+  const splineStyle = useMemo(() => ({
+    pointerEvents: 'auto' as const
+  }), []);
+
   return (
-    <div ref={containerRef} className={className} style={{ pointerEvents: 'auto', zIndex: 1 }}>
+    <div ref={containerRef} className={className} style={containerStyle}>
       <Suspense 
         fallback={
           <div className="w-full h-full flex items-center justify-center">
@@ -128,9 +155,9 @@ export function SplineScene({ scene, className, onError, onLoad }: SplineScenePr
         }
       >
         <Spline
-          scene={memoizedScene}
+          scene={scene}
           className="w-full h-full"
-          style={{ pointerEvents: 'auto' }}
+          style={splineStyle}
           onError={handleError}
           onLoad={handleLoad}
         />
