@@ -29,10 +29,11 @@ export default function Home() {
     // Set a timeout to fallback if Spline takes too long
     const timeout = setTimeout(() => {
       if (splineLoading) {
+        console.log('Spline loading timeout, falling back to gradients');
         setSplineError(true);
         setSplineLoading(false);
       }
-    }, 8000); // Increased timeout to 8 seconds
+    }, 3000); // Reduced timeout to 3 seconds for faster fallback
 
     return () => clearTimeout(timeout);
   }, [splineLoading]);
@@ -47,8 +48,6 @@ export default function Home() {
     setSplineError(true);
     setSplineLoading(false);
   };
-
-  console.log('Spline state:', { splineError, splineLoading });
 
   if (showIntro) {
     return <IntroAnimation onComplete={() => setShowIntro(false)} />;
@@ -109,7 +108,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
         {/* Spline 3D Scene as background */}
-        <div className="absolute inset-0 z-0 bg-black">
+        <div className="absolute inset-0 z-0">
           {!splineError ? (
             <>
               {splineLoading && (

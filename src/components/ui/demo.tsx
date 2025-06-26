@@ -1,10 +1,18 @@
 'use client'
 
+import { useState } from 'react';
 import { SplineScene } from "@/components/ui/splite";
 import { Card } from "@/components/ui/card"
 import { Spotlight } from "@/components/ui/spotlight"
  
 export function SplineSceneBasic() {
+  const [splineError, setSplineError] = useState(false);
+
+  const handleSplineError = (error: any) => {
+    console.error('Demo Spline error:', error);
+    setSplineError(true);
+  };
+
   return (
     <Card className="w-full h-[500px] bg-black/[0.96] relative overflow-hidden">
       <Spotlight
@@ -26,10 +34,17 @@ export function SplineSceneBasic() {
 
         {/* Right content */}
         <div className="flex-1 relative">
-          <SplineScene 
-            scene="https://21st.dev/serafim/splite/default"
-            className="w-full h-full"
-          />
+          {!splineError ? (
+            <SplineScene 
+              scene="https://21st.dev/serafim/splite/default"
+              className="w-full h-full"
+              onError={handleSplineError}
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
+              <p className="text-white/60 text-center">3D Scene Unavailable</p>
+            </div>
+          )}
         </div>
       </div>
     </Card>
