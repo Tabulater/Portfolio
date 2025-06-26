@@ -5,7 +5,7 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaWikipediaW, FaYoutube } from 'react
 import { SiLeetcode } from 'react-icons/si';
 import Image from 'next/image';
 import Projects from '@/components/Projects';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import IntroAnimation from '@/components/IntroAnimation';
 import { contactInfo } from '@/data/contact';
 import { MdEmail, MdLocationOn } from 'react-icons/md';
@@ -42,16 +42,16 @@ export default function Home() {
     };
   }, [splineLoading]);
 
-  const handleSplineLoad = () => {
+  const handleSplineLoad = useCallback(() => {
     console.log('Spline loaded successfully');
     setSplineLoading(false);
-  };
+  }, []);
 
-  const handleSplineError = (error: any) => {
+  const handleSplineError = useCallback((error: any) => {
     console.error('Spline error:', error);
     setSplineError(true);
     setSplineLoading(false);
-  };
+  }, []);
 
   if (showIntro) {
     return <IntroAnimation onComplete={() => setShowIntro(false)} />;

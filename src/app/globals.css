@@ -21,6 +21,9 @@
     );
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
+    /* Performance optimizations */
+    will-change: background-position;
+    transform: translateZ(0);
   }
 
   @keyframes gradientBG {
@@ -48,6 +51,9 @@
       radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
     pointer-events: none;
     z-index: 0;
+    /* Performance optimization */
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   body::after {
@@ -61,10 +67,15 @@
     opacity: 0.5;
     pointer-events: none;
     z-index: 0;
+    /* Performance optimization */
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   html {
     scroll-behavior: smooth;
+    /* Performance optimization */
+    will-change: scroll-position;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -91,22 +102,34 @@
 
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500;
+    /* Performance optimization */
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .card {
     @apply bg-background/50 backdrop-blur-sm border border-white/10 rounded-xl shadow-xl;
+    /* Performance optimization */
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .btn-primary {
     @apply px-6 py-3 bg-[rgb(var(--primary))] text-white rounded-lg font-medium 
            hover:bg-[rgb(var(--primary))]/90 transition-colors
            active:scale-95 transition-transform;
+    /* Performance optimization */
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .btn-outline {
     @apply px-6 py-3 border border-[rgb(var(--primary))] text-[rgb(var(--primary))] rounded-lg font-medium
            hover:bg-[rgb(var(--primary))] hover:text-white transition-colors
            active:scale-95 transition-transform;
+    /* Performance optimization */
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .section-padding {
@@ -118,15 +141,24 @@
            rounded-full text-sm font-medium border border-[rgb(var(--primary))]/20
            transition-all duration-300 hover:bg-[rgb(var(--primary))]/20
            hover:border-[rgb(var(--primary))]/30;
+    /* Performance optimization */
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .glass {
     @apply bg-white/5 backdrop-blur-sm border border-white/10
            shadow-lg hover:shadow-xl transition-all duration-300;
+    /* Performance optimization */
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .loader {
     @apply w-8 h-8 border-4 border-[rgb(var(--primary))]/20 border-t-[rgb(var(--primary))] rounded-full animate-spin;
+    /* Performance optimization */
+    will-change: transform;
+    transform: translateZ(0);
   }
 }
 
@@ -139,6 +171,14 @@
   }
   .animation-delay-4000 {
     animation-delay: 4s;
+  }
+  /* Performance utilities */
+  .gpu-accelerated {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+  .smooth-scroll {
+    scroll-behavior: smooth;
   }
 }
 
@@ -159,6 +199,9 @@
 
 .animate-blob {
   animation: blob 7s infinite;
+  /* Performance optimization */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Custom scrollbar */
@@ -188,6 +231,9 @@
 /* Project card hover effect */
 .project-card {
   @apply relative overflow-hidden;
+  /* Performance optimization */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .project-card::before {
@@ -200,46 +246,45 @@
   @apply opacity-100;
 }
 
-/* Smooth transitions */
+/* Performance optimizations */
 * {
-  @apply transition-colors duration-200;
+  box-sizing: border-box;
 }
 
-/* Focus styles */
 :focus-visible {
-  @apply outline-none ring-2 ring-[rgb(var(--primary))]/50 ring-offset-2 ring-offset-[rgb(var(--background))];
+  outline: 2px solid rgb(var(--primary));
+  outline-offset: 2px;
 }
 
-/* Button hover effects */
 .btn-primary:hover, .btn-outline:hover {
-  @apply transform -translate-y-0.5;
+  transform: translateY(-2px) translateZ(0);
 }
 
-/* Card hover effects */
 .card:hover {
-  @apply transform -translate-y-1;
+  transform: translateY(-4px) translateZ(0);
 }
 
-/* Improved text readability */
 p {
-  @apply leading-relaxed;
+  text-wrap: pretty;
 }
 
-/* Improved spacing */
 section {
-  @apply space-y-8;
+  contain: layout style paint;
 }
 
-/* Improved button accessibility */
 button, a {
-  @apply focus:outline-none focus:ring-2 focus:ring-[rgb(var(--primary))]/50 focus:ring-offset-2 focus:ring-offset-[rgb(var(--background))];
+  contain: layout style paint;
 }
 
-@layer base {
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
   * {
-    @apply border-border;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
+  
   body {
-    @apply bg-background text-foreground;
+    animation: none !important;
   }
 } 

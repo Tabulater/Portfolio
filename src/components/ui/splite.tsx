@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, lazy, useEffect, useRef, useCallback } from 'react'
+import { Suspense, lazy, useEffect, useRef, useCallback, useMemo } from 'react'
 const Spline = lazy(() => import('@splinetool/react-spline'))
 
 interface SplineSceneProps {
@@ -13,6 +13,9 @@ interface SplineSceneProps {
 export function SplineScene({ scene, className, onError, onLoad }: SplineSceneProps) {
   const splineRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Memoize the scene URL to prevent unnecessary re-renders
+  const memoizedScene = useMemo(() => scene, [scene]);
 
   const handleMouseMove = useCallback((event: MouseEvent) => {
     if (splineRef.current) {
@@ -100,20 +103,20 @@ export function SplineScene({ scene, className, onError, onLoad }: SplineScenePr
     };
   }, [handleMouseMove]);
 
-  const handleError = (error: any) => {
+  const handleError = useCallback((error: any) => {
     console.error('SplineScene error:', error);
     if (onError) {
       onError(error);
     }
-  };
+  }, [onError]);
 
-  const handleLoad = (spline: any) => {
+  const handleLoad = useCallback((spline: any) => {
     console.log('SplineScene loaded successfully');
     splineRef.current = spline;
     if (onLoad) {
       onLoad();
     }
-  };
+  }, [onLoad]);
 
   return (
     <div ref={containerRef} className={className} style={{ pointerEvents: 'auto', zIndex: 1 }}>
@@ -125,7 +128,7 @@ export function SplineScene({ scene, className, onError, onLoad }: SplineScenePr
         }
       >
         <Spline
-          scene={scene}
+          scene={memoizedScene}
           className="w-full h-full"
           style={{ pointerEvents: 'auto' }}
           onError={handleError}
