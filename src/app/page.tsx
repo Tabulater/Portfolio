@@ -10,6 +10,7 @@ import IntroAnimation from '@/components/IntroAnimation';
 import { contactInfo } from '@/data/contact';
 import { MdEmail, MdLocationOn } from 'react-icons/md';
 import { achievements } from '@/data/achievements';
+import Spline from '@splinetool/react-spline';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
@@ -89,7 +90,10 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/5 to-[rgb(var(--secondary))]/5"></div>
+        {/* Spline 3D Scene as background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Spline scene="https://21st.dev/serafim/splite/default" />
+        </div>
         <div className="container mx-auto px-4 py-32 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
