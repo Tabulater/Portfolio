@@ -20,6 +20,9 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
       <Spline
         scene={scene}
         className={className}
+        onError={(error) => {
+          console.error('Spline error:', error);
+        }}
       />
     </Suspense>
   )
