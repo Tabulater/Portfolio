@@ -11,7 +11,6 @@ import { contactInfo } from '@/data/contact';
 import { MdEmail, MdLocationOn } from 'react-icons/md';
 import { achievements } from '@/data/achievements';
 import { SplineScene } from '@/components/ui/splite';
-import Spline from '@splinetool/react-spline';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
@@ -26,6 +25,8 @@ export default function Home() {
       sessionStorage.removeItem('skipIntro');
     }
 
+    console.log('Home component mounted, setting up Spline timeout');
+    
     // Set a timeout to fallback if Spline takes too long
     const timeout = setTimeout(() => {
       if (splineLoading) {
@@ -33,9 +34,12 @@ export default function Home() {
         setSplineError(true);
         setSplineLoading(false);
       }
-    }, 3000); // Reduced timeout to 3 seconds for faster fallback
+    }, 5000); // Increased timeout to 5 seconds for testing
 
-    return () => clearTimeout(timeout);
+    return () => {
+      console.log('Clearing Spline timeout');
+      clearTimeout(timeout);
+    };
   }, [splineLoading]);
 
   const handleSplineLoad = () => {
@@ -116,35 +120,37 @@ export default function Home() {
                   <span className="loader"></span>
                 </div>
               )}
-              <Spline 
-                scene="https://21st.dev/serafim/splite/default"
+              <SplineScene 
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                 className="w-full h-full"
-                onLoad={handleSplineLoad}
                 onError={handleSplineError}
+                onLoad={handleSplineLoad}
               />
             </>
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/10 via-[rgb(var(--secondary))]/5 to-[rgb(var(--primary))]/10 animate-pulse"></div>
           )}
         </div>
-        <div className="container mx-auto px-4 py-32 relative z-10">
+        <div className="container mx-auto px-4 py-32 relative z-10" style={{ pointerEvents: 'none' }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center"
+            style={{ pointerEvents: 'none' }}
           >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6" style={{ pointerEvents: 'none' }}>
               <span className="gradient-text">Aspiring Mechatronics Engineer</span>
             </h1>
-            <p className="text-text-secondary text-xl md:text-2xl mb-12 leading-relaxed">
+            <p className="text-text-secondary text-xl md:text-2xl mb-12 leading-relaxed" style={{ pointerEvents: 'none' }}>
               Passionate about robotics, automation, and embedded systems. 
               Building innovative solutions that bridge the gap between hardware and software.
             </p>
-            <div className="flex justify-center gap-6">
+            <div className="flex justify-center gap-6" style={{ pointerEvents: 'none' }}>
               <motion.a
                 href="#projects"
                 className="btn-primary"
+                style={{ pointerEvents: 'auto' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -155,6 +161,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline"
+                style={{ pointerEvents: 'auto' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -163,6 +170,7 @@ export default function Home() {
               <motion.a
                 href="#contact"
                 className="btn-outline"
+                style={{ pointerEvents: 'auto' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
