@@ -14,6 +14,7 @@ import { SplineScene } from '@/components/ui/splite';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
+  const [splineError, setSplineError] = useState(false);
 
   useEffect(() => {
     // Check if we're coming from the Euclid page
@@ -22,6 +23,13 @@ export default function Home() {
       setShowIntro(false);
       sessionStorage.removeItem('skipIntro');
     }
+
+    // Set a timeout to fallback if Spline takes too long
+    const timeout = setTimeout(() => {
+      setSplineError(true);
+    }, 3000);
+
+    return () => clearTimeout(timeout);
   }, []);
 
   if (showIntro) {
@@ -84,10 +92,15 @@ export default function Home() {
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
         {/* Spline 3D Scene as background */}
         <div className="absolute inset-0 z-0">
-          <SplineScene 
-            scene="https://21st.dev/serafim/splite/default"
-            className="w-full h-full"
-          />
+          {!splineError ? (
+            <SplineScene 
+              scene="https://21st.dev/serafim/splite/default"
+              className="w-full h-full"
+              onError={() => setSplineError(true)}
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/10 via-[rgb(var(--secondary))]/5 to-[rgb(var(--primary))]/10 animate-pulse"></div>
+          )}
         </div>
         <div className="container mx-auto px-4 py-32 relative z-10">
           <motion.div
