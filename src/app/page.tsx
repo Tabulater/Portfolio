@@ -10,6 +10,7 @@ import IntroAnimation from '@/components/IntroAnimation';
 import { contactInfo } from '@/data/contact';
 import { MdEmail, MdLocationOn } from 'react-icons/md';
 import { achievements } from '@/data/achievements';
+import { SplineScene } from '@/components/ui/splite';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
@@ -83,8 +84,10 @@ export default function Home() {
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
         {/* Spline 3D Scene as background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/10 via-[rgb(var(--secondary))]/5 to-[rgb(var(--primary))]/10 animate-pulse"></div>
-          <div className="absolute inset-0 bg-gradient-to-tl from-[rgb(var(--secondary))]/5 via-transparent to-[rgb(var(--primary))]/5 animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <SplineScene 
+            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+            className="w-full h-full"
+          />
         </div>
         <div className="container mx-auto px-4 py-32 relative z-10">
           <motion.div
