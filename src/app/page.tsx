@@ -11,10 +11,12 @@ import { contactInfo } from '@/data/contact';
 import { MdEmail, MdLocationOn } from 'react-icons/md';
 import { achievements } from '@/data/achievements';
 import { SplineScene } from '@/components/ui/splite';
+import Spline from '@splinetool/react-spline';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [splineError, setSplineError] = useState(false);
+  const [splineLoading, setSplineLoading] = useState(true);
 
   useEffect(() => {
     // Check if we're coming from the Euclid page
@@ -26,11 +28,27 @@ export default function Home() {
 
     // Set a timeout to fallback if Spline takes too long
     const timeout = setTimeout(() => {
-      setSplineError(true);
-    }, 3000);
+      if (splineLoading) {
+        setSplineError(true);
+        setSplineLoading(false);
+      }
+    }, 8000); // Increased timeout to 8 seconds
 
     return () => clearTimeout(timeout);
-  }, []);
+  }, [splineLoading]);
+
+  const handleSplineLoad = () => {
+    console.log('Spline loaded successfully');
+    setSplineLoading(false);
+  };
+
+  const handleSplineError = (error: any) => {
+    console.error('Spline error:', error);
+    setSplineError(true);
+    setSplineLoading(false);
+  };
+
+  console.log('Spline state:', { splineError, splineLoading });
 
   if (showIntro) {
     return <IntroAnimation onComplete={() => setShowIntro(false)} />;
@@ -91,13 +109,21 @@ export default function Home() {
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
         {/* Spline 3D Scene as background */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 bg-black">
           {!splineError ? (
-            <SplineScene 
-              scene="https://21st.dev/serafim/splite/default"
-              className="w-full h-full"
-              onError={() => setSplineError(true)}
-            />
+            <>
+              {splineLoading && (
+                <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/10 via-[rgb(var(--secondary))]/5 to-[rgb(var(--primary))]/10 animate-pulse flex items-center justify-center z-10">
+                  <span className="loader"></span>
+                </div>
+              )}
+              <Spline 
+                scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"
+                className="w-full h-full"
+                onLoad={handleSplineLoad}
+                onError={handleSplineError}
+              />
+            </>
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/10 via-[rgb(var(--secondary))]/5 to-[rgb(var(--primary))]/10 animate-pulse"></div>
           )}
