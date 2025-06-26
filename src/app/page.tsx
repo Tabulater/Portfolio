@@ -118,7 +118,7 @@ export default function Home() {
                 </div>
               )}
               <Spline 
-                scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"
+                scene="https://21st.dev/serafim/splite/default"
                 className="w-full h-full"
                 onLoad={handleSplineLoad}
                 onError={handleSplineError}
