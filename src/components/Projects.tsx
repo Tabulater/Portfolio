@@ -20,7 +20,7 @@ export default function Projects() {
           className="max-w-4xl mx-auto text-center mb-16"
         >
           <h2 className="heading-2 mb-6">
-            <span className="gradient-text">Engineering Projects</span>
+            <span className="gradient-text">Projects</span>
           </h2>
           <p className="text-text-secondary text-lg leading-relaxed">
             A showcase of my technical projects, demonstrating my passion for mechatronics, 
