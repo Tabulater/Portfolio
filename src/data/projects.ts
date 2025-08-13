@@ -9,20 +9,21 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "ML Queue Prediction System",
+    description: "A comprehensive machine learning research project investigating the application of Neural Networks, Random Forest, and XGBoost algorithms to predict performance metrics in G/G/s queue systems. The project analyzes simulation-generated datasets to forecast queue behavior and system performance, demonstrating how modern ML approaches can provide accurate predictions for complex queue systems and offer insights into system optimization and resource allocation strategies.",
+    technologies: ["Python", "TensorFlow/Keras", "Scikit-learn", "XGBoost", "Machine Learning", "Queue Theory", "Neural Networks", "Random Forest"],
+    featured: true,
+    link: "https://mlqueuingmodels.vercel.app/",
+    github: "https://github.com/Tabulater/KingsUniveristyCollege",
+    image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fmlqueuingmodels.vercel.app%2F?w=1200"
+  },
+  {
     title: "Thermal Feedback Glove",
     description: "Developed an innovative haptic feedback glove designed to help patients with peripheral neuropathy. Integrated Peltier elements and temperature sensors to provide precise thermal feedback, creating a therapeutic device for sensory rehabilitation.",
     technologies: ["Arduino", "C++", "Embedded Systems", "Thermal Control", "Medical Devices"],
     featured: true,
     link: "#",
     github: "https://github.com/Tabulater/thermal-glove"
-  },
-  {
-    title: "Portfolio Website",
-    description: "Developed a modern, responsive portfolio website using Next.js and Tailwind CSS. Implemented smooth animations, glass-morphism effects, and a clean, professional design to showcase my projects and skills.",
-    technologies: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Framer Motion"],
-    featured: true,
-    link: "https://aashrith-raj.vercel.app",
-    github: "https://github.com/Tabulater/Portfolio"
   },
   {
     title: "Emergency Response Drone",

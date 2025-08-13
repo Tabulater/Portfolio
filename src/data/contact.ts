@@ -10,12 +10,12 @@ export interface ContactItem {
 export const contactInfo: ContactItem[] = [
   {
     label: "Email",
-    link: "mailto:aashrithraj.tatipamula@gmail.com",
+    link: "mailto:tatipamula.aashrithraj@gmail.com",
     iconType: 'email'
   },
   {
     label: "LinkedIn",
-    link: "https://www.linkedin.com/in/aashrith-raj-tatipamula-2b2b2b2b2/",
+    link: "https://www.linkedin.com/in/aashrith-raj-tatipamula/",
     iconType: 'linkedin'
   },
   {

@@ -8,11 +8,11 @@ export interface Achievement {
 
 export const achievements: Achievement[] = [
   {
-    title: "Euclid Mathematics Contest",
-    description: "Received Certificate of Participation in the prestigious Euclid Mathematics Contest, demonstrating mathematical problem-solving skills.",
+    title: "Coop Certificate of Completion",
+    description: "Successfully completed the Coop program at King's University College, gaining valuable work experience and professional development skills.",
     date: "2025",
-    icon: "📐",
-    link: "/achievements/euclid"
+    icon: "🎯",
+    link: "/achievements/coop"
   },
   {
     title: "Blue Ocean Competition Finalist",
