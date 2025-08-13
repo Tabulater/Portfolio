@@ -38,19 +38,29 @@ export default function Projects() {
         >
           <div className="card p-8 hover:scale-[1.02] transition-transform duration-300">
             <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="relative aspect-video rounded-xl overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/50 to-[rgb(var(--secondary))]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/20 to-[rgb(var(--secondary))]/20"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div
-                    className="w-16 h-16 rounded-full bg-[rgb(var(--primary))]/20 flex items-center justify-center"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <BiCodeAlt className="w-8 h-8 text-[rgb(var(--primary))]" />
-                  </motion.div>
-                </div>
-              </div>
+                             <div className="relative aspect-video rounded-xl overflow-hidden group">
+                 {featuredProjects[0]?.image ? (
+                   <img
+                     src={featuredProjects[0].image}
+                     alt={featuredProjects[0].title}
+                     className="w-full h-full object-cover"
+                   />
+                 ) : (
+                   <>
+                     <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/50 to-[rgb(var(--secondary))]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                     <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/20 to-[rgb(var(--secondary))]/20"></div>
+                     <div className="absolute inset-0 flex items-center justify-center">
+                       <motion.div
+                         className="w-16 h-16 rounded-full bg-[rgb(var(--primary))]/20 flex items-center justify-center"
+                         whileHover={{ scale: 1.1, rotate: 5 }}
+                         transition={{ duration: 0.2 }}
+                       >
+                         <BiCodeAlt className="w-8 h-8 text-[rgb(var(--primary))]" />
+                       </motion.div>
+                     </div>
+                   </>
+                 )}
+               </div>
               <div className="space-y-6">
                 <div>
                   <h3 className="text-2xl font-bold text-[rgb(var(--primary))] mb-2">
@@ -109,17 +119,27 @@ export default function Projects() {
             >
               <div className="card p-6 hover:scale-[1.02] transition-transform duration-300 h-full">
                 <div className="relative aspect-video rounded-xl overflow-hidden mb-6 group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/50 to-[rgb(var(--secondary))]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/20 to-[rgb(var(--secondary))]/20"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <motion.div
-                      className="w-12 h-12 rounded-full bg-[rgb(var(--primary))]/20 flex items-center justify-center"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <TbCodeDots className="w-6 h-6 text-[rgb(var(--primary))]" />
-                    </motion.div>
-                  </div>
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <>
+                      <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/50 to-[rgb(var(--secondary))]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--primary))]/20 to-[rgb(var(--secondary))]/20"></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <motion.div
+                          className="w-12 h-12 rounded-full bg-[rgb(var(--primary))]/20 flex items-center justify-center"
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <TbCodeDots className="w-6 h-6 text-[rgb(var(--primary))]" />
+                        </motion.div>
+                      </div>
+                    </>
+                  )}
                 </div>
                 <div className="space-y-4">
                   <div>
