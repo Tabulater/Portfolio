@@ -35,7 +35,7 @@ export default function Home() {
         setSplineError(true);
         setSplineLoading(false);
       }
-    }, 5000); // Increased timeout to 5 seconds for testing
+    }, 2000); // Reduced timeout to 2 seconds for better performance
 
     return () => {
       console.log('Clearing Spline timeout');
@@ -200,10 +200,11 @@ export default function Home() {
                 alt="Profile"
                 width={288}
                 height={288}
-                    className="rounded-full border-4 border-white/10 shadow-xl"
+                className="rounded-full border-4 border-white/10 shadow-xl"
                 priority
-                quality={100}
+                quality={85}
                 style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 288px, 288px"
               />
                 </div>
                 <div>

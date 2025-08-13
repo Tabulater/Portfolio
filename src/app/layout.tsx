@@ -8,6 +8,8 @@ const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   preload: true,
+  fallback: ['system-ui', 'arial'],
+  adjustFontFallback: false,
 })
 
 export const metadata: Metadata = {
@@ -78,12 +80,14 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Preload critical resources */}
-        <link rel="preload" href="/Profile.png" as="image" />
-        <link rel="preload" href="/Favicon.png" as="image" />
+        <link rel="preload" href="/Profile.png" as="image" type="image/png" />
+        <link rel="preload" href="/Favicon.png" as="image" type="image/png" />
         <link rel="dns-prefetch" href="//prod.spline.design" />
         <link rel="dns-prefetch" href="//21st.dev" />
         <link rel="preconnect" href="https://prod.spline.design" />
         <link rel="preconnect" href="https://21st.dev" />
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
       <body className={`${inter.className} bg-primary text-text-primary`}>
         <main className="min-h-screen">
