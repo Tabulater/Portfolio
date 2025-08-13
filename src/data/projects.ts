@@ -5,6 +5,7 @@ export interface Project {
   featured: boolean;
   link: string;
   github?: string;
+  image?: string;
 }
 
 export const projects: Project[] = [
