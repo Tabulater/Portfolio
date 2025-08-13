@@ -11,6 +11,7 @@ import { contactInfo } from '@/data/contact';
 import { MdEmail, MdLocationOn } from 'react-icons/md';
 import { achievements } from '@/data/achievements';
 import { SplineScene } from '@/components/ui/splite';
+import ContactForm from '@/components/ContactForm';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
@@ -286,93 +287,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="section-padding">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center mb-16"
-          >
-            <h2 className="heading-2 mb-6">
-              <span className="gradient-text">Get In Touch</span>
-            </h2>
-            <p className="text-text-secondary text-lg leading-relaxed">
-              I'm always open to discussing new opportunities, innovative projects, 
-              and exciting collaborations. Let's connect!
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-            {/* Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="card p-8">
-                <h3 className="text-2xl font-bold text-[rgb(var(--primary))] mb-6">Contact Information</h3>
-                <div className="space-y-4">
-                  {contactInfo.filter(item => item.iconType === 'email' || item.iconType === 'location').map((item) => (
-                    <div key={item.label} className="flex items-center gap-3">
-                      {item.iconType === 'email' ? (
-                        <MdEmail className="text-[rgb(var(--primary))] text-xl" />
-                      ) : (
-                        <MdLocationOn className="text-[rgb(var(--primary))] text-xl" />
-                      )}
-                      <a 
-                        href={item.link} 
-                        className="text-text-secondary hover:text-[rgb(var(--primary))] transition-colors"
-                        {...(item.iconType === 'email' ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
-                      >
-                        {item.label === 'Location' ? 'Toronto, Canada' : item.link.replace('mailto:', '')}
-                      </a>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="card p-8">
-                <h3 className="text-2xl font-bold text-[rgb(var(--primary))] mb-6">Connect With Me</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {contactInfo.filter(item => item.iconType !== 'email' && item.iconType !== 'location').map((item) => {
-                    const getIcon = () => {
-                      switch (item.iconType) {
-                        case 'linkedin': return <FaLinkedin />;
-                        case 'github': return <FaGithub />;
-                        case 'appropedia': return <FaWikipediaW />;
-                        default: return null;
-                      }
-                    };
-                    
-                    return (
-                      <motion.a
-                        key={item.label}
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-3 p-3 rounded-lg bg-[rgb(var(--primary))]/10 hover:bg-[rgb(var(--primary))]/20 transition-colors"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <span className="text-xl">{getIcon()}</span>
-                        <span className="text-text-secondary">{item.label}</span>
-                      </motion.a>
-                    );
-                  })}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      <ContactForm />
     </main>
   );
 } 
