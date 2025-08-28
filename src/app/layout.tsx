@@ -88,6 +88,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://21st.dev" />
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
         <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="modulepreload" href="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" />
+        <link rel="preconnect" href="https://unpkg.com" />
+        <link rel="dns-prefetch" href="//unpkg.com" />
       </head>
       <body className={`${inter.className} bg-primary text-text-primary`}>
         <main className="min-h-screen">

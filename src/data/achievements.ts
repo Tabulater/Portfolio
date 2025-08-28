@@ -4,9 +4,18 @@ export interface Achievement {
   date: string;
   icon: string;
   link?: string;
+  issuer?: string;
 }
 
 export const achievements: Achievement[] = [
+  {
+    title: "Excellence Award – Horizon Academic Essay Prize (Top 20%)",
+    description: "Selected among the top 20% of 1,952 international essays. Recognized for excellence in originality, critical thinking, and academic writing. Award includes a $1,000 USD scholarship to Horizon's research program.",
+    date: "Aug 2025",
+    icon: "🏅",
+    link: "/achievements/horizon-essay-prize",
+    issuer: "Horizon Academic Research Program"
+  },
   {
     title: "Coop Certificate of Completion",
     description: "Successfully completed the Coop program at King's University College, gaining valuable work experience and professional development skills.",

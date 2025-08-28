@@ -1,7 +1,10 @@
 'use client'
 
-import { Suspense, lazy, useEffect, useRef, useCallback, useMemo } from 'react'
-const Spline = lazy(() => import('@splinetool/react-spline'))
+import { Suspense, lazy, useEffect, useRef, useCallback, useMemo, useState } from 'react'
+// Preload Spline for better performance
+const Spline = lazy(() => import('@splinetool/react-spline'), {
+  ssr: false
+})
 
 interface SplineSceneProps {
   scene: string
@@ -15,6 +18,8 @@ export function SplineScene({ scene, className, onError, onLoad }: SplineScenePr
   const containerRef = useRef<HTMLDivElement>(null);
   const lastEmitTime = useRef(0);
   const lastPosition = useRef({ x: 0, y: 0 });
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   // Throttle mouse events for better performance
   const handleMouseMove = useCallback((event: MouseEvent) => {
@@ -111,17 +116,28 @@ export function SplineScene({ scene, className, onError, onLoad }: SplineScenePr
   }, []);
 
   useEffect(() => {
+    // Preload Spline for better performance
+    const preloadSpline = () => {
+      import('@splinetool/react-spline');
+    };
+    
+    // Preload after a short delay to not block initial render
+    const preloadTimer = setTimeout(preloadSpline, 100);
+    
     // Add mouse move listener to the entire window for better tracking
     // Use capture phase to ensure we get events even when over other elements
     window.addEventListener('mousemove', handleMouseMove, { passive: true, capture: true });
 
     return () => {
+      clearTimeout(preloadTimer);
       window.removeEventListener('mousemove', handleMouseMove, { capture: true });
     };
   }, [handleMouseMove]);
 
   const handleError = useCallback((error: any) => {
     console.error('SplineScene error:', error);
+    setHasError(true);
+    setIsLoading(false);
     if (onError) {
       onError(error);
     }
@@ -130,6 +146,7 @@ export function SplineScene({ scene, className, onError, onLoad }: SplineScenePr
   const handleLoad = useCallback((spline: any) => {
     console.log('SplineScene loaded successfully');
     splineRef.current = spline;
+    setIsLoading(false);
     if (onLoad) {
       onLoad();
     }
@@ -145,12 +162,29 @@ export function SplineScene({ scene, className, onError, onLoad }: SplineScenePr
     pointerEvents: 'auto' as const
   }), []);
 
+  // Show error state if there's an error
+  if (hasError) {
+    return (
+      <div ref={containerRef} className={className} style={containerStyle}>
+        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[rgb(var(--primary))]/10 via-[rgb(var(--secondary))]/5 to-[rgb(var(--primary))]/10">
+          <div className="text-center">
+            <div className="text-4xl mb-4">🤖</div>
+            <p className="text-text-secondary">3D Scene Unavailable</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div ref={containerRef} className={className} style={containerStyle}>
       <Suspense 
         fallback={
-          <div className="w-full h-full flex items-center justify-center">
-            <span className="loader"></span>
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[rgb(var(--primary))]/10 via-[rgb(var(--secondary))]/5 to-[rgb(var(--primary))]/10">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-4"></div>
+              <p className="text-text-secondary">Loading 3D Scene...</p>
+            </div>
           </div>
         }
       >

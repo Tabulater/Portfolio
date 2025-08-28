@@ -9,9 +9,9 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import IntroAnimation from '@/components/IntroAnimation';
 import { contactInfo } from '@/data/contact';
 import { MdEmail, MdLocationOn } from 'react-icons/md';
-import { achievements } from '@/data/achievements';
 import { SplineScene } from '@/components/ui/splite';
 import ContactForm from '@/components/ContactForm';
+import Achievements from '@/components/Achievements';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
@@ -228,67 +228,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects Section */}
-      <Projects />
+{/* Projects Section */}
+<Projects />
 
-      {/* Achievements Section */}
-      <section id="achievements" className="section-padding">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center mb-16"
-          >
-            <h2 className="heading-2 mb-6">
-              <span className="gradient-text">Achievements</span>
-            </h2>
-            <p className="text-text-secondary text-lg leading-relaxed">
-              Recognition for my contributions to engineering and technology, 
-              demonstrating my commitment to excellence and innovation.
-            </p>
-          </motion.div>
+{/* Achievements Section */}
+<Achievements />
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {achievements.map((achievement, index) => (
-              <motion.div
-                key={achievement.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
-              >
-                <div className="card p-6 hover:scale-[1.02] transition-transform duration-300">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-3xl">{achievement.icon}</span>
-                    <h3 className="text-xl font-bold text-[rgb(var(--primary))]">
-                      {achievement.title}
-                    </h3>
-                  </div>
-                  <p className="text-text-secondary leading-relaxed mb-4">
-                    {achievement.description}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-400">{achievement.date}</span>
-                    {achievement.link && (
-                      <a
-                        href={achievement.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[rgb(var(--primary))] hover:underline"
-                      >
-                        View Details →
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <ContactForm />
-    </main>
-  );
+{/* Contact Section */}
+<ContactForm />
+</main>
+);
 } 
